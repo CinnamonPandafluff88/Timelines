@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(response => response.json())
             .then(data => {
-                populateTable(data.project.tasks); // Assuming the tasks are in the 'data' property of the response
+                populateTable(data.project.tasks); // Assuming the tasks are in the 'project.tasks' property of the response
             })
             .catch(error => console.error('Error fetching data:', error));
         } else {
@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Attach the fetchProjectData function to the global scope
     window.fetchProjectData = fetchProjectData;
+});
 
     // Function to load CSV data for Risks and Issues
     function loadCSVForRisksAndIssues() {
