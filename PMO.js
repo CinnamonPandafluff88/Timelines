@@ -92,7 +92,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Attach the loadCSVForRisksAndIssues and saveEditsForRisksAndIssues functions to the global scope
     window.loadCSVForRisksAndIssues = loadCSVForRisksAndIssues;
     window.saveEditsForRisksAndIssues = saveEditsForRisksAndIssues;
-});
 
 // Tab functionality
 const tabs = document.querySelectorAll('.tab_btn');
