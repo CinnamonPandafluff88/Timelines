@@ -15,9 +15,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     'Content-Type': 'application/json'
                 }
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(data => {
-                populateTable(data.project.tasks); // Assuming the tasks are in the 'project.tasks' property of the response
+                populateTable(data); // Assuming the tasks are in the response data directly
             })
             .catch(error => console.error('Error fetching data:', error));
         } else {
@@ -46,7 +51,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Attach the fetchProjectData function to the global scope
     window.fetchProjectData = fetchProjectData;
-});
 
     // Function to load CSV data for Risks and Issues
     function loadCSVForRisksAndIssues() {
@@ -92,48 +96,48 @@ document.addEventListener('DOMContentLoaded', function() {
     // Attach the loadCSVForRisksAndIssues and saveEditsForRisksAndIssues functions to the global scope
     window.loadCSVForRisksAndIssues = loadCSVForRisksAndIssues;
     window.saveEditsForRisksAndIssues = saveEditsForRisksAndIssues;
-}
-// Tab functionality
-const tabs = document.querySelectorAll('.tab_btn');
-const all_content = document.querySelectorAll('.content');
 
-tabs.forEach((tab, index) => {
-    tab.addEventListener('click', () => {
-        tabs.forEach(tab => { tab.classList.remove('active') });
-        tab.classList.add('active');
+    // Tab functionality
+    const tabs = document.querySelectorAll('.tab_btn');
+    const all_content = document.querySelectorAll('.content');
 
-        var line = document.querySelectorAll('.line');
-        line[0].style.width = tab.offsetWidth + "px";
-        line[0].style.left = tab.offsetLeft + "px";
+    tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(tab => { tab.classList.remove('active') });
+            tab.classList.add('active');
 
-        all_content.forEach(content => { content.classList.remove('active') });
-        all_content[index].classList.add('active');
+            var line = document.querySelectorAll('.line');
+            line[0].style.width = tab.offsetWidth + "px";
+            line[0].style.left = tab.offsetLeft + "px";
+
+            all_content.forEach(content => { content.classList.remove('active') });
+            all_content[index].classList.add('active');
+        });
     });
-});
 
-// Email script portion for SMTP 
-document.getElementById('fs-frm').addEventListener('submit', function(event) {
-    event.preventDefault();
+    // Email script portion for SMTP 
+    document.getElementById('fs-frm').addEventListener('submit', function(event) {
+        event.preventDefault();
 
-    const emailField = document.getElementById('email');
-    const messageField = document.getElementById('message');
-    const email = emailField.value;
-    const message = messageField.value;
+        const emailField = document.getElementById('email');
+        const messageField = document.getElementById('message');
+        const email = emailField.value;
+        const message = messageField.value;
 
-    Email.send({
-        SecureToken: "d0c95fa5-7a38-4c0a-a9d7-1785db02b37e",
-        To: 'siphosihle.tsotsa@liquidc2.com',
-        From: email,
-        Subject: "Contact Form Submission",
-        Body: `<p><strong>Email:</strong> ${email}</p><p><strong>Message:</strong> ${message}</p>`
-    }).then(
-       response => {
+        Email.send({
+            SecureToken: "d0c95fa5-7a38-4c0a-a9d7-1785db02b37e",
+            To: 'siphosihle.tsotsa@liquidc2.com',
+            From: email,
+            Subject: "Contact Form Submission",
+            Body: `<p><strong>Email:</strong> ${email}</p><p><strong>Message:</strong> ${message}</p>`
+        }).then(
+            response => {
                 alert("Email sent successfully!");
                 emailField.value = '';
                 messageField.value = '';
             }
-
-    ).catch(
-        error => alert("Failed to send email: " + error)
-    );
+        ).catch(
+            error => alert("Failed to send email: " + error)
+        );
+    });
 });
