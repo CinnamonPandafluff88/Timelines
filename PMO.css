@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-image: url('file:///C:/Users/Siphosihle.Tsotsa/OneDrive%20-%20Liquid%20Intelligent%20Technologies/PM/Demo%20website/Logo.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #f1f7fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+body { font-family: Arial, sans-serif; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 8px 12px; border: 1px solid #ddd; }
+    th { background-color: #f4f4f4; }
+    .scrollable { overflow-y: auto; max-height: 200px; } /* Set a max height and enable vertical scrolling */
+    .transparent-box {
+      background-color: rgba(241, 247, 250, 0.5); /* Semi-transparent background */
+      padding: 30px;
+      border-radius: 20px;
+      width: 600px;
+      margin: 0 auto;
+      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      font-size: .825rem;
+      margin-bottom: .5rem;
+      padding-top: .2rem;
+      display: flex;
+      align-items: baseline;
+    }
+    textarea {
+      border: 1px solid rgba(0,0,0,0.2);
+      background-color: rgba(255,255,255,0.9);
+      padding: .75em 1rem;
+      margin-bottom: 1.5rem;
+      width: 100%;
+      resize: vertical;
+    }
+    textarea:focus {
+      background-color: white;
+      outline-style: solid;
+      outline-width: thin;
+      outline-color: gray;
+      outline-offset: -1px;
+    }
+    input[type="submit"] {
+      width: auto;
+      cursor: pointer;
+      padding: .75em 1rem;
+      background-color: rgba(0, 123, 255, 0.7); /* Semi-transparent background */
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Shadow for 3D effect */
+      transform: perspective(1px) translateZ(0); /* 3D effect */
+      transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+    input[type="submit"]:hover {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
+      transform: scale(1.05); /* Slight increase in size for 3D effect */
+    }
+/*
+    .flower-list {
+  list-style: none; /* Remove default bullets */
+/*  padding-left: 20px; /* Adjust padding to position the list items *//*
+}
+*/
+/*.flower-list li {
+  position: relative;
+  margin-bottom: 10px; /* Add space between list items *//*
+}
+
+.flower-list li::before {
+  content: "🌻"; /* Flower emoji */
+/*  position: absolute;
+  left: -20px; /* Position the emoji */
+/*}
+*/
+.check-lists {
+  list-style: none;
+  padding: 0;
+}
+
+.check-lists li {
+  margin-bottom: 5px;
+}
+
+.check-lists li input[type="checkbox"] {
+  margin-right: 10px;
+}
+.container {
+  width: 1500px;
+  background-color: rgba(241, 247, 250, 0.5); /* Semi-transparent background */
+  padding: 30px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tab_box {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 2px solid rgba(242, 247, 250, 1);
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Ensure tabs are always on top */
+}
+
+.tab_box .tab_btn {
+  font-size: 18px;
+  font-weight: 600;
+  color: #919191;
+  background: none;
+  border: none;
+  padding: 18px;
+  cursor: pointer;
+}
+
+.tab_box .tab_btn.active {
+  color: #cdafea;
+}
+
+.content_box {
+  width: 100%;
+  padding: 20px;
+}
+
+.content_box .content {
+  display: none;
+  animation: moving .5s ease;
+}
+
+@keyframes moving {
+  from { transform: translateX(50px); opacity: 0; }
+  to { transform: translateX(0px); opacity: 1; }
+}
+
+.content_box .content.active {
+  display: block;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+.line {
+  position: absolute;
+  top: 62px;
+  left: 17px;
+  width: 90px;
+  height: 5px;
+  background-color: #cdafea;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+}

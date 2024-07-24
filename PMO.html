@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tabs white</title>
+  <link rel="stylesheet" type="text/css" href="PMO.css">
+</head>
+<body>
+  <div class="container">
+    <div class="tab_box">
+      <button class="tab_btn active">Landing</button>
+      <button class="tab_btn">Timelines</button>
+      <button class="tab_btn">Risks and Issues</button>
+      <button class="tab_btn">Contact us</button>
+      <div class="line"></div>
+    </div>
+    <div class="content_box">
+      <div class="content active">
+        <h2>Landing</h2>
+        <p>
+          <h3>Welcome to the Project Management Office Demo</h3>
+          Author: Me 😏 <br>
+          <br> The second Demo with the following fixes:
+          <ul class="check-lists">
+  <li><input type="checkbox" id="background" name="background" checked>Background changed to showcase the logo instead of hide it</li>
+  <li><input type="checkbox" id="risks-issues" name="risks-issues" checked>Risks and issues tab</li>
+  <li><input type="checkbox" id="api-integration" name="api-integration" checked>API integration</li>
+  <li><input type="checkbox" id="working-api" name="working-api">Working API integration</li>
+  <li><input type="checkbox" id="link-fetching" name="link-fetching">Link fetching</li>
+  <li><input type="checkbox" id="csv-loading" name="csv-loading">CSV loading for risks and issues</li>
+  <li><input type="checkbox" id="display-link" name="display-link">Displaying the fetched link with API integration on Timelines tab</li>
+  <li><input type="checkbox" id="shareable-link" name="shareable-link">Shareable read-only link to send to "customers"</li>
+  <li><input type="checkbox" id="contact-us" name="contact-us">Working Contact Us Portion</li>
+</ul>
+
+        </p>
+        <br>
+        <hr>
+        <p>
+          📝 Note this landing page will not be available once the final adjustments have been made, as this is just for demo purposes only. Timelines, Risks and Issues, and Contact us will be available.
+        </p>
+      </div>
+      <div class="content">
+        <h2>Timelines</h2>
+<p>
+  The idea I came up with is the following: When we have a project in PPMx and we create project timelines, we only have to paste the link of the project below:
+</p>
+<input type="text" id="projectLinkInput" placeholder="Paste project link here">
+<button onclick="fetchAllTasks()">Fetch Project Data</button>
+<h1>Program Name Project Timelines</h1>
+<div class="scrollable">
+  <table id="tasksTable">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Assigned to:</th>
+        <th>Start date</th>
+        <th>Due date</th>
+        <th>Progress</th>
+         <th>Group</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+</div>
+      <div class="content">
+        <h2>Risks and Issues</h2>
+        <p>
+          Risks and issues below:
+        </p>
+        <h1>Program Name Project Risks and Issues</h1>
+        <div class="scrollable">
+          <table id="risksTable">
+            <thead>
+              <tr>
+                <th>Task Name</th>
+                <th>Status</th>
+                <th>Start date</th>
+                <th>Tentative end date</th>
+                <th>Assigned to:</th>
+                <th>Progress</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <input type="file" id="csvFileInputRisks" onchange="loadCSVForRisksAndIssues()">
+        <button onclick="saveEditsForRisksAndIssues()">Save Edits</button>
+      </div>
+     <div class="content">
+  <h2>Contact Us</h2>
+  <p>
+    <h3>Want to contact the PM for more information on where exactly your project is at?</h3>
+    Please fill in the box below and we'll get in contact.
+  </p>
+  <div class="transparent-box">
+    <form id="fs-frm" name="simple-contact-form" accept-charset="utf-8">
+      <label for="email">Your Email</label>
+      <input type="email" name="email" id="email" placeholder="Your email address" required autocomplete="email">
+      
+      <label for="message">Message</label>
+      <textarea rows="5" name="message" id="message" placeholder="Type request here..." required autocomplete="off"></textarea>
+      
+      <input type="hidden" name="_subject" id="email-subject" value="Contact Form Submission">
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+</div>
+    <script src="PMO.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+  </div>
+</body>
+</html>
