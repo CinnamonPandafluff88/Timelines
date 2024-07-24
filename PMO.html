@@ -41,29 +41,28 @@
           📝 Note this landing page will not be available once the final adjustments have been made, as this is just for demo purposes only. Timelines, Risks and Issues, and Contact us will be available.
         </p>
       </div>
-      <div class="content">
-        <h2>Timelines</h2>
-<p>
-  The idea I came up with is the following: When we have a project in PPMx and we create project timelines, we only have to paste the link of the project below:
-</p>
-<input type="text" id="projectLinkInput" placeholder="Paste project link here">
-<button onclick="fetchAllTasks()">Fetch Project Data</button>
-<h1>Program Name Project Timelines</h1>
-<div class="scrollable">
-  <table id="tasksTable">
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Assigned to:</th>
-        <th>Start date</th>
-        <th>Due date</th>
-        <th>Progress</th>
-         <th>Group</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-</div>
+     <div class="content">
+  <h2>Timelines</h2>
+  <p>
+    The idea I came up with is the following: When we have a project in PPMx and we create project timelines, we only have to paste the link of the project below:
+  </p>
+  <input type="text" id="projectIdInput" placeholder="Enter Project ID">
+  <button onclick="fetchProjectData()">Fetch Project Data</button>
+  <h1>Program Name Project Timelines</h1>
+  <div class="scrollable">
+    <table id="tasksTable">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Assigned to:</th>
+          <th>Start date</th>
+          <th>Due date</th>
+          <th>Progress</th>
+          <th>Group</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
 </div>
       <div class="content">
         <h2>Risks and Issues</h2>
