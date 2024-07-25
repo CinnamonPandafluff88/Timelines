@@ -1,56 +1,32 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const apiUrl = 'https://api-eu.ppm.express/'; // Replace with your API endpoint
-    const apiToken = 'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiIyMTg0MTMyZS1kZGZjLTRhYWEtOGViZi0yZDViNjhlZDVjMjEiLCJqdGkiOiIxNDNlZTVmNi1iMmM4LTQxY2YtYTk5YS1hNjYzNzMxODlhZDMiLCJzY29wZSI6InJlc291cmNlOndyaXRlIHJlc291cmNlOnJlYWQgcHJvamVjdDp3cml0ZSBwcm9qZWN0OnJlYWQgY2hhbGxlbmdlOnJlYWQgY2hhbGxlbmdlOndyaXRlIGlkZWE6cmVhZCBpZGVhOndyaXRlIHRhc2s6cmVhZCB0YXNrOndyaXRlIGtleWRhdGU6cmVhZCBrZXlkYXRlOndyaXRlIHVzZXI6cmVhZCBwcm9ncmFtOnJlYWQgcHJvZ3JhbTp3cml0ZSBwb3J0Zm9saW86cmVhZCBwb3J0Zm9saW86d3JpdGUiLCJuYmYiOjE3MjE2MzY5MzUsImV4cCI6MTc1MzE4NTYwMCwiaXNzIjoiaHR0cHM6Ly9hcHAtcHBteC1wcm9kLWV1LXdlYi5henVyZXdlYnNpdGVzLm5ldC8iLCJhdWQiOiJQUE1YX1B1YmxpY0FQSSJ9.c1J-1U5RcjxES2GWCAA1MITwhh81isyZgrkjfVE8bOg'; // Replace with your actual API token
+function fetchProjectData() {
+    const projectId = document.getElementById('projectIdInput').value;
+    const tenant = '@liquid'; // Replace with your tenant name
 
-    // Function to fetch project data
-    function fetchProjectData() {
-        const projectId = document.getElementById('projectIdInput').value;
-        const tenant = '@liquid'; // Replace with your tenant name
-
-        if (projectId) {
-            fetch(`${apiUrl}@${tenant}/v1.0/projects/${projectId}/tasks`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${apiToken}`,
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                populateTable(data); // Assuming the tasks are in the response data directly
-            })
-            .catch(error => console.error('Error fetching data:', error));
-        } else {
-            alert('Invalid project ID');
-        }
+    if (projectId) {
+        // Use a CORS proxy
+        const corsProxy = 'https://cors-anywhere.herokuapp.com/';
+        fetch(corsProxy + `${apiUrl}@${tenant}/v1.0/projects/${projectId}/tasks`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${apiToken}`,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            populateTable(data); // Assuming the tasks are in the response data directly
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    } else {
+        alert('Invalid project ID');
     }
+}
 
-    // Function to populate the tasks table
-    function populateTable(tasks) {
-        const tableBody = document.querySelector('#tasksTable tbody');
-        tableBody.innerHTML = ''; // Clear existing table data
-
-        tasks.forEach(task => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${task.attributes.Title}</td>
-                <td>${task.attributes.AssignedTo[0].fullName}</td>
-                <td>${task.attributes.StartDate}</td>
-                <td>${task.attributes.DueDate}</td>
-                <td>${task.attributes.Progress}</td>
-                <td>${task.attributes.Group}</td>
-            `;
-            tableBody.appendChild(row);
-        });
-    }
-
-    // Attach the fetchProjectData function to the global scope
-    window.fetchProjectData = fetchProjectData;
 
     // Function to load CSV data for Risks and Issues
     function loadCSVForRisksAndIssues() {
