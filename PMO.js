@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to fetch project data
     function fetchProjectData() {
         const projectId = document.getElementById('projectIdInput').value;
-        const tenant = 'liquid'; // Replace with your tenant name
+        const tenant = '@liquid'; // Replace with your tenant name
 
         if (projectId) {
             fetch(`${apiUrl}@${tenant}/v1.0/projects/${projectId}/tasks`, {
