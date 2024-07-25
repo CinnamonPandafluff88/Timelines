@@ -116,7 +116,8 @@ const apiToken = 'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZS
     });
 
     // Email script portion for SMTP 
-    document.getElementById('fs-frm').addEventListener('submit', function(event) {
+    document.getElementById('fs-frm').addEventListener('submit', function(event) 
+                                                       {
         event.preventDefault();
 
         const emailField = document.getElementById('email');
