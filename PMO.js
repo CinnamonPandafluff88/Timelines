@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const apiUrl = 'https://api-eu.ppm.express/v1.0/swagger.json'; // Replace with your API endpoint
-    const apiToken = 'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiIyMTg0MTMyZS1kZGZjLTRhYWEtOGViZi0yZDViNjhlZDVjMjEiLCJqdGkiOiIxNDNlZTVmNi1iMmM4LTQxY2YtYTk5YS1hNjYzNzMxODlhZDMiLCJzY29wZSI6InJlc291cmNlOndyaXRlIHJlc291cmNlOnJlYWQgcHJvamVjdDp3cml0ZSBwcm9qZWN0OnJlYWQgY2hhbGxlbmdlOnJlYWQgY2hhbGxlbmdlOndyaXRlIGlkZWE6cmVhZCBpZGVhOndyaXRlIHRhc2s6cmVhZCB0YXNrOndyaXRlIGtleWRhdGU6cmVhZCBrZXlkYXRlOndyaXRlIHVzZXI6cmVhZCBwcm9ncmFtOnJlYWQgcHJvZ3JhbTp3cml0ZSBwb3J0Zm9saW86cmVhZCBwb3J0Zm9saW86d3JpdGUiLCJuYmYiOjE3MjE2MzY5MzUsImV4cCI6MTc1MzE4NTYwMCwiaXNzIjoiaHR0cHM6Ly9hcHAtcHBteC1wcm9kLWV1LXdlYi5henVyZXdlYnNpdGVzLm5ldC8iLCJhdWQiOiJQUE1YX1B1YmxpY0FQSSJ9.c1J-1U5RcjxES2GWCAA1MITwhh81isyZgrkjfVE8bOg'; // Replace with your actual API token
+    const apiToken = '----'; // Replace with your actual API token
 
     // Function to fetch project data
     function fetchProjectData() {
