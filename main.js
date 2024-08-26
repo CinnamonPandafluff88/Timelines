@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const tenant = 'liquid'; // Replace with your tenant name
 
         if (projectId) {
-            fetch(`https:https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/tasks/${tenant}/${projectId}`, {
+            fetch(`https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/tasks/${tenant}/${projectId}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
@@ -26,6 +26,31 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     document.getElementById('fetchButton').addEventListener('click', fetchProjectData);
+
+    // Tab functionality
+    const tabs = document.querySelectorAll('.tab_btn');
+    const all_content = document.querySelectorAll('.content');
+    const line = document.querySelector('.line');
+
+    tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(tab => { tab.classList.remove('active') });
+            tab.classList.add('active');
+
+            line.style.width = tab.offsetWidth + "px";
+            line.style.left = tab.offsetLeft + "px";
+
+            all_content.forEach(content => { content.classList.remove('active') });
+            all_content[index].classList.add('active');
+        });
+    });
+
+    // Initialize the line position
+    const activeTab = document.querySelector('.tab_btn.active');
+    if (activeTab) {
+        line.style.width = activeTab.offsetWidth + "px";
+        line.style.left = activeTab.offsetLeft + "px";
+    }
 });
 
 // Function to populate the tasks table 
@@ -92,25 +117,3 @@ function saveEditsForRisksAndIssues() {
 // Attach the loadCSVForRisksAndIssues and saveEditsForRisksAndIssues functions to the global scope
 window.loadCSVForRisksAndIssues = loadCSVForRisksAndIssues;
 window.saveEditsForRisksAndIssues = saveEditsForRisksAndIssues;
-
-// Tab functionality
-const tabs = document.querySelectorAll('.tab_btn');
-const all_content = document.querySelectorAll('.content');
-
-tabs.forEach((tab, index) => {
-    tab.addEventListener('click', () => {
-        tabs.forEach(tab => { tab.classList.remove('active') });
-        tab.classList.add('active');
-
-        let line  = document.querySelectorAll('.line');
-        line[0].style.width = tab.offsetWidth + "px";
-        line[0].style.left = tab.offsetLeft + "px";
-
-        all_content.forEach(content => { content.classList.remove('active') });
-        all_content[index].classList.add('active');
-    });
-});
-
-// Attach the fetchProjectData function to a button click
-const fetchButton = document.getElementById('fetchButton'); 
-fetchButton.addEventListener('click', fetchProjectData); 
