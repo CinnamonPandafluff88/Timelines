@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function fetchProjectData() {
   const projectId = document.getElementById('projectIdInput').value;
-  const apiUrl = `https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev`;
+  const apiUrl = `https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/tasks/liquid/${projectId}`;
 
   try {
     const response = await fetch(apiUrl);
