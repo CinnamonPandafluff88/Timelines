@@ -1,31 +1,30 @@
-async function fetchProjectData() {
+function fetchProjectData() {
   const projectId = document.getElementById('projectIdInput').value;
   const apiUrl = `https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/tasks/liquid/${projectId}`;
 
-  console.log('Fetching data from:', apiUrl);
-
-  try {
-    const response = await fetch(apiUrl);
-    console.log('Response status:', response.status);
-
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-
-    const data = await response.json();
-    console.log('Fetched data:', data);
-
-    if (!Array.isArray(data)) {
-      throw new Error('Fetched data is not an array');
-    }
-
-    populateTasksTable(data);
-  } catch (error) {
-    console.error('Error fetching data:', error);
+  if (projectId) {
+    fetch(apiUrl, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      populateTable(data); // Assuming the tasks are in the response data directly
+    })
+    .catch(error => console.error('Error fetching data:', error));
+  } else {
+    alert('Invalid project ID');
   }
 }
 
-function populateTasksTable(data) {
+function populateTable(data) {
   const tasksTableBody = document.getElementById('tasksTable').getElementsByTagName('tbody')[0];
   tasksTableBody.innerHTML = ''; // Clear existing rows
 
@@ -39,7 +38,6 @@ function populateTasksTable(data) {
     row.insertCell(5).textContent = task.group;
   });
 }
-
 
 async function loadCSVForRisksAndIssues() {
   const fileInput = document.getElementById('csvFileInputRisks');
