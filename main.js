@@ -1,113 +1,81 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const tabs = document.querySelectorAll('.tab_btn');
-    const all_content = document.querySelectorAll('.content');
-    const line = document.querySelector('.line');
+    function fetchProjectData() {
+        const projectId = document.getElementById('projectIdInput').value;
+        const tenant = 'liquid'; // Replace with your tenant name
 
-    tabs.forEach((tab, index) => {
-        tab.addEventListener('click', () => {
-            tabs.forEach(tab => { tab.classList.remove('active') });
-            tab.classList.add('active');
-
-            line.style.width = tab.offsetWidth + "px";
-            line.style.left = tab.offsetLeft + "px";
-
-            all_content.forEach(content => { content.classList.remove('active') });
-            all_content[index].classList.add('active');
-        });
-    });
-
-    // Initialize the line position
-    const activeTab = document.querySelector('.tab_btn.active');
-    if (activeTab) {
-        line.style.width = activeTab.offsetWidth + "px";
-        line.style.left = activeTab.offsetLeft + "px";
+        if (projectId) {
+            fetch(`https:https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/tasks/${tenant}/${projectId}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                populateTable(data); 
+            })
+            .catch(error => console.error('Error fetching data:', error));
+        } else {
+            alert('Invalid project ID');
+        }
     }
+
+    document.getElementById('fetchButton').addEventListener('click', fetchProjectData);
 });
 
-function fetchProjectData() {
-    const projectId = document.getElementById('projectIdInput').value;
-    const apiUrl = `https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/tasks/liquid/${projectId}`;
+// Function to populate the tasks table 
+function populateTable(tasks) {
+    const tableBody = document.querySelector('#tasksTable tbody');
+    tableBody.innerHTML = ''; // Clear existing table data
 
-    if (projectId) {
-        fetch(apiUrl, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            populateTable(data); // Assuming the tasks are in the response data directly
-        })
-        .catch(error => console.error('Error fetching data:', error));
-    } else {
-        alert('Invalid project ID');
-    }
-}
-
-function populateTable(data) {
-    const tasksTableBody = document.getElementById('tasksTable').getElementsByTagName('tbody')[0];
-    tasksTableBody.innerHTML = ''; // Clear existing rows
-
-    data.forEach(task => {
-        const row = tasksTableBody.insertRow();
-        row.insertCell(0).textContent = task.title;
-        row.insertCell(1).textContent = task.assignedTo;
-        row.insertCell(2).textContent = task.startDate;
-        row.insertCell(3).textContent = task.dueDate;
-        row.insertCell(4).textContent = task.progress;
-        row.insertCell(5).textContent = task.group;
+    tasks.forEach(task => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${task.Title}</td> 
+            <td>${task.Status}</td> 
+            <td>${task.StartDate}</td> 
+            <td>${task.DueDate}</td> 
+            <td>${task.AssignedTo || 'Unassigned'}</td> 
+            <td>${task.Progress}</td> 
+            <td>${task.Description || 'No Description'}</td> 
+        `;
+        tableBody.appendChild(row);
     });
 }
 
-async function loadCSVForRisksAndIssues() {
-    const fileInput = document.getElementById('csvFileInputRisks');
-    const file = fileInput.files[0];
+// Function to load CSV data for Risks and Issues
+function loadCSVForRisksAndIssues() {
+    const input = document.getElementById('csvFileInputRisks');
+    const file = input.files[0];
     const reader = new FileReader();
 
-    reader.onload = function(event) {
-        const csvData = event.target.result;
-        const data = parseCSV(csvData);
-        populateRisksTable(data);
+    reader.onload = function(e) {
+        const text = e.target.result;
+        const rows = text.split('\n');
+        const table = document.getElementById('risksTable').getElementsByTagName('tbody')[0];
+        table.innerHTML = ''; // Clear existing rows
+
+        rows.forEach((row, index) => {
+            if (index === 0 || row.trim() === '') return; // Skip header row and empty rows
+            const cols = row.split(',');
+            const newRow = table.insertRow();
+            cols.forEach(col => {
+                const cell = newRow.insertCell();
+                cell.textContent = col.trim();
+                cell.setAttribute('contenteditable', 'true'); // Make cell editable
+            });
+        });
     };
 
     reader.readAsText(file);
 }
 
-function parseCSV(csvData) {
-    const lines = csvData.split('\n');
-    const headers = lines[0].split(',');
-    const data = lines.slice(1).map(line => {
-        const values = line.split(',');
-        return headers.reduce((obj, header, index) => {
-            obj[header] = values[index];
-            return obj;
-        }, {});
-    });
-    return data;
-}
-
-function populateRisksTable(data) {
-    const risksTableBody = document.getElementById('risksTable').getElementsByTagName('tbody')[0];
-    risksTableBody.innerHTML = ''; // Clear existing rows
-
-    data.forEach(risk => {
-        const row = risksTableBody.insertRow();
-        row.insertCell(0).textContent = risk['Task Name'];
-        row.insertCell(1).textContent = risk.Status;
-        row.insertCell(2).textContent = risk['Start date'];
-        row.insertCell(3).textContent = risk['Tentative end date'];
-        row.insertCell(4).textContent = risk['Assigned to'];
-        row.insertCell(5).textContent = risk.Progress;
-        row.insertCell(6).textContent = risk.Description;
-    });
-}
-
+// Function to save edited CSV data for Risks and Issues
 function saveEditsForRisksAndIssues() {
     const table = document.getElementById('risksTable');
     let csvContent = '';
@@ -120,3 +88,29 @@ function saveEditsForRisksAndIssues() {
     }
     console.log(csvContent); // Handle the CSV content as needed
 }
+
+// Attach the loadCSVForRisksAndIssues and saveEditsForRisksAndIssues functions to the global scope
+window.loadCSVForRisksAndIssues = loadCSVForRisksAndIssues;
+window.saveEditsForRisksAndIssues = saveEditsForRisksAndIssues;
+
+// Tab functionality
+const tabs = document.querySelectorAll('.tab_btn');
+const all_content = document.querySelectorAll('.content');
+
+tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => {
+        tabs.forEach(tab => { tab.classList.remove('active') });
+        tab.classList.add('active');
+
+        let line  = document.querySelectorAll('.line');
+        line[0].style.width = tab.offsetWidth + "px";
+        line[0].style.left = tab.offsetLeft + "px";
+
+        all_content.forEach(content => { content.classList.remove('active') });
+        all_content[index].classList.add('active');
+    });
+});
+
+// Attach the fetchProjectData function to a button click
+const fetchButton = document.getElementById('fetchButton'); 
+fetchButton.addEventListener('click', fetchProjectData); 
