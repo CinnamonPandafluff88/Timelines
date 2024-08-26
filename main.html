@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Main</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+    <div class="container">
+        <div class="tab_box">
+          <button class="tab_btn active">Landing</button>
+          <button class="tab_btn">Timelines</button>
+          <button class="tab_btn">Risks and Issues</button>
+          <button class="tab_btn">Contact us</button>
+          <div class="line"></div>
+        </div>
+        <div class="content_box">
+          <div class="content active">
+           <!--Main Page landing -->
+            <p>
+              <h3>Welcome to the Project Management Office Demo</h3>
+              Author: Me 😏 <br>
+              <br> The second Demo with the following fixes:
+              <ul class="check-lists">
+      <li><input type="checkbox" id="background" name="background" checked>Background changed to showcase the logo instead of hide it</li>
+      <li><input type="checkbox" id="risks-issues" name="risks-issues" checked>Risks and issues tab</li>
+      <li><input type="checkbox" id="api-integration" name="api-integration" checked>API integration</li>
+      <li><input type="checkbox" id="working-api" name="working-api">Working API integration</li>
+      <li><input type="checkbox" id="csv-loading" name="csv-loading" checked>CSV loading for risks and issues</li>
+      <li><input type="checkbox" id="display-link" name="display-link">Displaying the fetched link with API integration on Timelines tab</li>
+      <li><input type="checkbox" id="contact-us" name="contact-us">Working Contact Us Portion</li>
+    </ul>
+    
+            </p>
+            <br>
+            <hr>
+            <p> Big thanks to the following individuals for helping out in this cold, dark coding world
+                <ul class="flower-list">
+                <li>Fanie van Vuuren - assisting me in the REST API, testing and understanding of them, giving me access to the Cloudflare NFR (without this I don't know what would be of this project) I really wanted it to be free, and utilizing the business resources was a plus for me.</li>
+                <li>Tshepo Shale - correcting the portion of my code where I populate my table, making it easier to understand and not complicate life like how I was doing.</li>
+                <li>Steven Selelo - Helping me correct my header input for the API and correcting that portion of my JavaScript code, as well as recomending ways for me to correct the error I kept on getting which was frustrating, without his information and insight I don't think I would have been able to complete this project.</li>
+                <li>My team: Talu Mulaudzi, Murendeni Nematswerani, Babalwa Ngcwayi- for the continued support and belief</li>
+                <li>Honourable mentions: Chuma Raxothi - willing to assist me, redid my code to understand, built his own versoin to help me troubleshoot my error</li>            
+        </ul>
+            </p>
+            <br>
+            <hr>
+            <p>
+              📝 Note this landing page will not be available once the final adjustments have been made, as this is just for demo purposes only. Timelines, Risks and Issues, and Contact us will be available.
+            </p>
+          </div>
+        <div class="content">
+      <!--This portion is where the API endpoint is meant to be used. This part was the most difficult YOH!-->
+      <p>
+        The idea I came up with is the following: When we have a project in PPMx and we create project timelines, we only have to paste the link of the project below:
+      </p>
+      <input type="text" id="projectIdInput" placeholder="Enter Project ID">
+      <button id="fetchButton" onclick="fetchProjectData()">Fetch Project Data</button>
+      <h1>Program Name Project Timelines</h1>
+      <div class="scrollable">
+        <table id="tasksTable">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Assigned to:</th>
+              <th>Start date</th>
+              <th>Due date</th>
+              <th>Progress</th>
+              <th>Group</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+          <div class="content">
+    <!--Area for Risk and Issues tab, this portion fetches data from a csv file and populates accordingly.-->
+            <p>
+              Risks and issues below:
+            </p>
+            <h1>Program Name Project Risks and Issues</h1>
+            <div class="scrollable">
+              <table id="risksTable">
+                <thead>
+                  <tr>
+                    <th>Task Name</th>
+                    <th>Status</th>
+                    <th>Start date</th>
+                    <th>Tentative end date</th>
+                    <th>Assigned to:</th>
+                    <th>Progress</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+            <input type="file" id="csvFileInputRisks" onchange="loadCSVForRisksAndIssues()">
+            <button onclick="saveEditsForRisksAndIssues()">Save Edits</button>
+          </div>
+         <div class="content">
+
+      <p>
+        <h3>Want to contact the PM for more information on where exactly your project is at?</h3>
+        Please fill in the box below and we'll get in contact.
+      </p>
+      <div class="transparent-box">
+        <form id="fs-frm" name="simple-contact-form" accept-charset="utf-8">
+          <label for="email">Your Email</label>
+          <input type="email" name="email" id="email" placeholder="Your email address" required autocomplete="email">
+          
+          <label for="message">Message</label>
+          <textarea rows="5" name="message" id="message" placeholder="Type request here..." required autocomplete="off"></textarea>
+          
+          <input type="hidden" name="_subject" id="email-subject" value="Contact Form Submission">
+          <input type="submit" value="Submit">
+        </form>
+      </div>
+    </div>
+    </div>
+    <script src="main.js"></script>
+    </div>
+</body>
+</html>
