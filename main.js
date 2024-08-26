@@ -1,28 +1,24 @@
-document.addEventListener('DOMContentLoaded', function() {
-  const tabButtons = document.querySelectorAll('.tab_btn');
-  const contents = document.querySelectorAll('.content');
-
-  tabButtons.forEach((btn, index) => {
-    btn.addEventListener('click', () => {
-      tabButtons.forEach(button => button.classList.remove('active'));
-      contents.forEach(content => content.classList.remove('active'));
-
-      btn.classList.add('active');
-      contents[index].classList.add('active');
-    });
-  });
-});
-
 async function fetchProjectData() {
   const projectId = document.getElementById('projectIdInput').value;
   const apiUrl = `https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/tasks/liquid/${projectId}`;
 
+  console.log('Fetching data from:', apiUrl);
+
   try {
     const response = await fetch(apiUrl);
+    console.log('Response status:', response.status);
+
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
+
     const data = await response.json();
+    console.log('Fetched data:', data);
+
+    if (!Array.isArray(data)) {
+      throw new Error('Fetched data is not an array');
+    }
+
     populateTasksTable(data);
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -43,6 +39,7 @@ function populateTasksTable(data) {
     row.insertCell(5).textContent = task.group;
   });
 }
+
 
 async function loadCSVForRisksAndIssues() {
   const fileInput = document.getElementById('csvFileInputRisks');
