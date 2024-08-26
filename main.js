@@ -1,18 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
   const tabButtons = document.querySelectorAll('.tab_btn');
   const contents = document.querySelectorAll('.content');
-
-  tabButtons.forEach((btn, index) => {
-    btn.addEventListener('click', () => {
-      tabButtons.forEach(button => button.classList.remove('active'));
-      contents.forEach(content => content.classList.remove('active'));
-
-      btn.classList.add('active');
-      contents[index].classList.add('active');
-    });
-  });
-});
-
+  
 function fetchProjectData() {
   const projectId = document.getElementById('projectIdInput').value;
   const apiUrl = `https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/tasks/liquid/${projectId}`;
@@ -98,7 +87,6 @@ function populateRisksTable(data) {
 }
 
 function saveEditsForRisksAndIssues() {
-function saveEditsForRisksAndIssues() {
     const table = document.getElementById('risksTable');
     let csvContent = '';
     for (let row of table.rows) {
@@ -110,3 +98,22 @@ function saveEditsForRisksAndIssues() {
     }
     console.log(csvContent); // Handle the CSV content as needed
 }
+  const tabs = document.querySelectorAll('.tab_btn');
+const all_content = document.querySelectorAll('.content');
+
+tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => {
+        tabs.forEach(tab => { tab.classList.remove('active') });
+        tab.classList.add('active');
+
+        let line  = document.querySelectorAll('.line');
+        line[0].style.width = tab.offsetWidth + "px";
+        line[0].style.left = tab.offsetLeft + "px";
+
+        all_content.forEach(content => { content.classList.remove('active') });
+        all_content[index].classList.add('active');
+    });
+});
+
+}
+  
