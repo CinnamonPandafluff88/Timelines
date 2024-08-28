@@ -73,7 +73,8 @@ function populateTable(tasks) {
         const row = document.createElement('tr');
 
         // Access attributes safely using conditionals
-        const groupName = task.attributes.Group && task.attributes.Group.name ? task.attributes.Group.name : 'N/A';
+        const groupName = task.attributes.Group?.name ?? 'N/A';
+
 // ... in populateTable() function
 const startDate = new Date(task.attributes.StartDate);
 const dueDate = new Date(task.attributes.DueDate);
