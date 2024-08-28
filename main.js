@@ -1,4 +1,4 @@
-ffunction fetchProjectData() {
+function fetchProjectData() {
     const projectUrl = document.getElementById('projectIdInput').value;
     const tenant = 'liquid'; // Replace with your tenant name
 
