@@ -109,6 +109,7 @@ function loadCSVForRisks() {
     reader.onload = function(e) {
         const text = e.target.result;
         const rows = text.split('\n');
+        console.log('CSV Rows:', rows); // Debugging line
         const table = document.getElementById('risksTable').getElementsByTagName('tbody')[0];
         table.innerHTML = ''; // Clear existing rows
 
@@ -126,6 +127,7 @@ function loadCSVForRisks() {
 
     reader.readAsText(file);
 }
+
 // Function to load CSV data for Issues
 function loadCSVForIssues() {
     const input = document.getElementById('csvFileInputIssues');
@@ -135,6 +137,7 @@ function loadCSVForIssues() {
     reader.onload = function(e) {
         const text = e.target.result;
         const rows = text.split('\n');
+        console.log('CSV Rows:', rows); // Debugging line
         const table = document.getElementById('issuesTable').getElementsByTagName('tbody')[0];
         table.innerHTML = ''; // Clear existing rows
 
