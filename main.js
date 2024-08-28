@@ -19,6 +19,37 @@ function fetchProjectTasks(projectId, tenant) {
     .catch(error => console.error('Error fetching tasks:', error));
 }
 
+// Function to populate the tasks table 
+function populateTasksTable(tasks) {
+    const tableBody = document.querySelector('#tasksTable tbody');
+    tableBody.innerHTML = ''; // Clear existing table data
+
+    if (!Array.isArray(tasks)) {
+        console.error('Expected an array but got:', tasks);
+        return;
+    }
+
+    tasks.forEach(task => {
+        const row = document.createElement('tr');
+
+        // Access attributes safely using conditionals
+        const groupName = task.attributes.Group?.name ?? 'N/A';
+        const startDate = new Date(task.attributes.StartDate);
+        const dueDate = new Date(task.attributes.DueDate);
+
+        row.innerHTML = `
+            <td>${task.attributes.Name}</td> 
+            <td>${task.attributes.AssignedTo ? task.attributes.AssignedTo.map(a => a.fullName).join(', ') : 'Unassigned'}</td> 
+            <td>${startDate.getMonth() + 1}/${startDate.getDate()}/${startDate.getFullYear()}</td> 
+            <td>${dueDate.getMonth() + 1}/${dueDate.getDate()}/${dueDate.getFullYear()}</td> 
+            <td>${task.attributes.Progress}</td> 
+            <td>${groupName}</td> 
+        `;
+
+        tableBody.appendChild(row);
+    });
+}
+
 // Function to fetch all data
 function fetchAllProjectData() {
     const projectUrl = document.getElementById('projectIdInput').value;
@@ -44,37 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Attach the event listener after the DOM is fully loaded
     document.getElementById('fetchButton').addEventListener('click', fetchAllProjectData);
 
-    // Function to populate the tasks table 
-    function populateTasksTable(tasks) {
-        const tableBody = document.querySelector('#tasksTable tbody');
-        tableBody.innerHTML = ''; // Clear existing table data
-
-        if (!Array.isArray(tasks)) {
-            console.error('Expected an array but got:', tasks);
-            return;
-        }
-
-        tasks.forEach(task => {
-            const row = document.createElement('tr');
-
-            // Access attributes safely using conditionals
-            const groupName = task.attributes.Group?.name ?? 'N/A';
-            const startDate = new Date(task.attributes.StartDate);
-            const dueDate = new Date(task.attributes.DueDate);
-
-            row.innerHTML = `
-                <td>${task.attributes.Name}</td> 
-                <td>${task.attributes.AssignedTo ? task.attributes.AssignedTo.map(a => a.fullName).join(', ') : 'Unassigned'}</td> 
-                <td>${startDate.getMonth() + 1}/${startDate.getDate()}/${startDate.getFullYear()}</td> 
-                <td>${dueDate.getMonth() + 1}/${dueDate.getDate()}/${dueDate.getFullYear()}</td> 
-                <td>${task.attributes.Progress}</td> 
-                <td>${groupName}</td> 
-            `;
-
-            tableBody.appendChild(row);
-        });
-    }
-        // Tab functionality
+    // Tab functionality
     const tabs = document.querySelectorAll('.tab_btn');
     const all_content = document.querySelectorAll('.content');
     const line = document.querySelector('.line');
