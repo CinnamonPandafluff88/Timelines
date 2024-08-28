@@ -1,6 +1,9 @@
-function fetchProjectData() {
-    const projectId = document.getElementById('projectIdInput').value;
+ffunction fetchProjectData() {
+    const projectUrl = document.getElementById('projectIdInput').value;
     const tenant = 'liquid'; // Replace with your tenant name
+
+    // Extract the project ID from the URL
+    const projectId = projectUrl.split('/').pop().split('?')[0];
 
     if (projectId) {
         fetch(`https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/tasks/${tenant}/${projectId}`, {
@@ -15,6 +18,15 @@ function fetchProjectData() {
             }
             return response.json();
         })
+        .then(data => {
+            console.log('Fetched data:', data.data); 
+            populateTable(data.data);
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    } else {
+        alert('Invalid project URL');
+    }
+}
         .then(data => {
             console.log('Fetched data:', data.data); // Log the data to inspect its structure
             populateTable(data.data); // Access the 'data' property
