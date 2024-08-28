@@ -109,7 +109,6 @@ function loadCSVForRisks() {
     reader.onload = function(e) {
         const text = e.target.result;
         const rows = text.split('\n');
-        console.log('CSV Rows:', rows); // Debugging line
         const table = document.getElementById('risksTable').getElementsByTagName('tbody')[0];
         table.innerHTML = ''; // Clear existing rows
 
@@ -117,10 +116,12 @@ function loadCSVForRisks() {
             if (index === 0 || row.trim() === '') return; // Skip header row and empty rows
             const cols = row.split(',');
             const newRow = table.insertRow();
-            cols.forEach(col => {
+
+            // Only include specified headers
+            const headers = ['Title', 'Probability', 'Status', 'Category', 'Description'];
+            headers.forEach(header => {
                 const cell = newRow.insertCell();
-                cell.textContent = col.trim();
-                cell.setAttribute('contenteditable', 'true'); // Make cell editable
+                cell.textContent = cols[headers.indexOf(header)].trim();
             });
         });
     };
@@ -137,7 +138,6 @@ function loadCSVForIssues() {
     reader.onload = function(e) {
         const text = e.target.result;
         const rows = text.split('\n');
-        console.log('CSV Rows:', rows); // Debugging line
         const table = document.getElementById('issuesTable').getElementsByTagName('tbody')[0];
         table.innerHTML = ''; // Clear existing rows
 
@@ -145,13 +145,16 @@ function loadCSVForIssues() {
             if (index === 0 || row.trim() === '') return; // Skip header row and empty rows
             const cols = row.split(',');
             const newRow = table.insertRow();
-            cols.forEach(col => {
+
+            // Only include specified headers
+            const headers = ['Title', 'Priority', 'Due date', 'Status', 'Category', 'Description'];
+            headers.forEach(header => {
                 const cell = newRow.insertCell();
-                cell.textContent = col.trim();
-                cell.setAttribute('contenteditable', 'true'); // Make cell editable
+                cell.textContent = cols[headers.indexOf(header)].trim();
             });
         });
     };
 
     reader.readAsText(file);
 }
+
