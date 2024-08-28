@@ -30,6 +30,7 @@ function fetchProjectData() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Attach the event listener after the DOM is fully loaded
     document.getElementById('fetchButton').addEventListener('click', fetchProjectData);
 
     // Tab functionality
