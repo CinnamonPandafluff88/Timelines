@@ -134,15 +134,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Access attributes safely using conditionals
             const riskName = risk.attributes.Name ?? 'N/A';
-            const riskDescription = risk.attributes.Description ?? 'N/A';
-            const riskImpact = risk.attributes.Impact ?? 'N/A';
             const riskProbability = risk.attributes.Probability ?? 'N/A';
+            const riskStatus = risk.attributes.Status ?? 'N/A';
+            const riskDescription = risk.attributes.Description ?? 'N/A';
 
             row.innerHTML = `
                 <td>${riskName}</td> 
-                <td>${riskDescription}</td> 
-                <td>${riskImpact}</td> 
                 <td>${riskProbability}</td> 
+                <td>${riskStatus}</td> 
+                <td>${riskDescription}</td> 
             `;
 
             tableBody.appendChild(row);
@@ -164,15 +164,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Access attributes safely using conditionals
             const issueName = issue.attributes.Name ?? 'N/A';
+            const issuePriority = issues.attributes.Priority ?? 'N/A';
+            const issueDueDate = issues.attributes.DueDate ?? 'N/A';
+            const issueStatus = issue.attributes.Status ?? 'N/A';
+            const issueCategory = issue.attributes.Category ?? 'N/A';
             const issueDescription = issue.attributes.Description ?? 'N/A';
-            const issueImpact = issue.attributes.Impact ?? 'N/A';
-            const issueProbability = issue.attributes.Probability ?? 'N/A';
+            
 
             row.innerHTML = `
                 <td>${issueName}</td> 
-                <td>${issueDescription}</td> 
-                <td>${issueImpact}</td> 
-                <td>${issueProbability}</td> 
+                <td>${issuePriority}</td> 
+                <td>${issueDueDate}</td> 
+                 <td>${issueStatus}</td> 
+                <td>${issueCategory}</td> 
+                 <td>${issueDescription}</td> 
             `;
 
             tableBody.appendChild(row);
