@@ -15,15 +15,10 @@ function fetchProjectData() {
             }
             return response.json();
         })
-            //CONSOLE.LOG
-            function fetchProjectData() {
-    // ... (rest of your code)
-
-    .then(data => {
-        console.log('Fetched data:', data.data); // Log the data to inspect its structure
-        populateTable(data.data); // Access the 'data' property
-    })
-    // ... (rest of your code)
+        .then(data => {
+            console.log('Fetched data:', data.data); // Log the data to inspect its structure
+            populateTable(data.data); // Access the 'data' property
+        })
         .catch(error => console.error('Error fetching data:', error));
     } else {
         alert('Invalid project ID');
@@ -71,14 +66,17 @@ function populateTable(tasks) {
 
     tasks.forEach(task => {
         const row = document.createElement('tr');
+
+        // Access attributes safely using conditionals
+        const groupName = task.attributes.Group && task.attributes.Group.name ? task.attributes.Group.name : 'N/A';
+
         row.innerHTML = `
             <td>${task.attributes.Name}</td> 
-            <td>${task.attributes.Status}</td> 
+            <td>${task.attributes.AssignedTo ? task.attributes.AssignedTo.map(a => a.fullName).join(', ') : 'Unassigned'}</td> 
+            <td>${task.attributes.StartDate}</td> 
+            <td>${task.attributes.DueDate}</td> 
             <td>${task.attributes.Progress}</td> 
-            <td>${task.attributes.Group.name}</td> 
-            <td>${task.attributes.IsMilestone}</td> 
-            <td>${task.attributes.Priority}</td> 
-            <td>${task.attributes.Predecessor.length > 0 ? task.attributes.Predecessor.map(pre => pre.name).join(', ') : 'None'}</td> 
+            <td>${groupName}</td> 
         `;
         tableBody.appendChild(row);
     });
