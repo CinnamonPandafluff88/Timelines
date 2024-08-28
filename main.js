@@ -109,21 +109,18 @@ function loadCSVForRisks() {
     reader.onload = function(e) {
         const text = e.target.result;
         const rows = text.split('\n');
+        console.log('CSV Rows:', rows); // Debugging line
         const table = document.getElementById('risksTable').getElementsByTagName('tbody')[0];
         table.innerHTML = ''; // Clear existing rows
 
         rows.forEach((row, index) => {
             if (index === 0 || row.trim() === '') return; // Skip header row and empty rows
             const cols = row.split(',');
-
-            // Map CSV columns to the desired headers
-            const [title, probability, status, category, , description] = cols;
-
             const newRow = table.insertRow();
-            const cells = [title, probability, status, category, description];
-            cells.forEach(cellData => {
+            cols.forEach(col => {
                 const cell = newRow.insertCell();
-                cell.textContent = cellData.trim();
+                cell.textContent = col.trim();
+                cell.setAttribute('contenteditable', 'true'); // Make cell editable
             });
         });
     };
@@ -140,21 +137,18 @@ function loadCSVForIssues() {
     reader.onload = function(e) {
         const text = e.target.result;
         const rows = text.split('\n');
+        console.log('CSV Rows:', rows); // Debugging line
         const table = document.getElementById('issuesTable').getElementsByTagName('tbody')[0];
         table.innerHTML = ''; // Clear existing rows
 
         rows.forEach((row, index) => {
             if (index === 0 || row.trim() === '') return; // Skip header row and empty rows
             const cols = row.split(',');
-
-            // Map CSV columns to the desired headers
-            const [title, priority, dueDate, , status, category, description] = cols;
-
             const newRow = table.insertRow();
-            const cells = [title, priority, dueDate, status, category, description];
-            cells.forEach(cellData => {
+            cols.forEach(col => {
                 const cell = newRow.insertCell();
-                cell.textContent = cellData.trim();
+                cell.textContent = col.trim();
+                cell.setAttribute('contenteditable', 'true'); // Make cell editable
             });
         });
     };
