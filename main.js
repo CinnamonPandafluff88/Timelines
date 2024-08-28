@@ -1,31 +1,31 @@
-document.addEventListener('DOMContentLoaded', function() {
-    function fetchProjectData() {
-        const projectId = document.getElementById('projectIdInput').value;
-        const tenant = 'liquid'; // Replace with your tenant name
+function fetchProjectData() {
+    const projectId = document.getElementById('projectIdInput').value;
+    const tenant = 'liquid'; // Replace with your tenant name
 
-        if (projectId) {
-            fetch(`https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/tasks/${tenant}/${projectId}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Fetched data:', data); // Log the data to inspect its structure
-                populateTable(data); 
-            })
-            .catch(error => console.error('Error fetching data:', error));
-        } else {
-            alert('Invalid project ID');
-        }
+    if (projectId) {
+        fetch(`https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/tasks/${tenant}/${projectId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Fetched data:', data); // Log the data to inspect its structure
+            populateTable(data); 
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    } else {
+        alert('Invalid project ID');
     }
+}
 
+document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('fetchButton').addEventListener('click', fetchProjectData);
 
     // Tab functionality
