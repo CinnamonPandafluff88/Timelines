@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then(data => {
+                console.log('Fetched data:', data); // Log the data to inspect its structure
                 populateTable(data); 
             })
             .catch(error => console.error('Error fetching data:', error));
@@ -58,6 +59,11 @@ function populateTable(tasks) {
     const tableBody = document.querySelector('#tasksTable tbody');
     tableBody.innerHTML = ''; // Clear existing table data
 
+    if (!Array.isArray(tasks)) {
+        console.error('Expected an array but got:', tasks);
+        return;
+    }
+
     tasks.forEach(task => {
         const row = document.createElement('tr');
         row.innerHTML = `
@@ -72,48 +78,3 @@ function populateTable(tasks) {
         tableBody.appendChild(row);
     });
 }
-
-// Function to load CSV data for Risks and Issues
-function loadCSVForRisksAndIssues() {
-    const input = document.getElementById('csvFileInputRisks');
-    const file = input.files[0];
-    const reader = new FileReader();
-
-    reader.onload = function(e) {
-        const text = e.target.result;
-        const rows = text.split('\n');
-        const table = document.getElementById('risksTable').getElementsByTagName('tbody')[0];
-        table.innerHTML = ''; // Clear existing rows
-
-        rows.forEach((row, index) => {
-            if (index === 0 || row.trim() === '') return; // Skip header row and empty rows
-            const cols = row.split(',');
-            const newRow = table.insertRow();
-            cols.forEach(col => {
-                const cell = newRow.insertCell();
-                cell.textContent = col.trim();
-                cell.setAttribute('contenteditable', 'true'); // Make cell editable
-            });
-        });
-    };
-
-    reader.readAsText(file);
-}
-
-// Function to save edited CSV data for Risks and Issues
-function saveEditsForRisksAndIssues() {
-    const table = document.getElementById('risksTable');
-    let csvContent = '';
-    for (let row of table.rows) {
-        let rowData = [];
-        for (let cell of row.cells) {
-            rowData.push(cell.textContent);
-        }
-        csvContent += rowData.join(',') + '\n';
-    }
-    console.log(csvContent); // Handle the CSV content as needed
-}
-
-// Attach the loadCSVForRisksAndIssues and saveEditsForRisksAndIssues functions to the global scope
-window.loadCSVForRisksAndIssues = loadCSVForRisksAndIssues;
-window.saveEditsForRisksAndIssues = saveEditsForRisksAndIssues;
