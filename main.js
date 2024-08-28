@@ -17,7 +17,7 @@ function fetchProjectData() {
         })
         .then(data => {
             console.log('Fetched data:', data); // Log the data to inspect its structure
-            populateTable(data); 
+            populateTable(data.data); // Access the 'data' property
         })
         .catch(error => console.error('Error fetching data:', error));
     } else {
