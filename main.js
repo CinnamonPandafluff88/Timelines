@@ -16,7 +16,7 @@ function fetchProjectData() {
             return response.json();
         })
         .then(data => {
-            console.log('Fetched data:', data.data[0]); // Log the data to inspect its structure
+            console.log('Fetched data:', data.data.data[0]); // Log the data to inspect its structure
             populateTable(data.data); // Access the 'data' property
         })
         .catch(error => console.error('Error fetching data:', error));
