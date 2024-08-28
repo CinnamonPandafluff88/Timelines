@@ -77,9 +77,9 @@
           <div class="content">
     <!--Area for Risk and Issues tab, this portion fetches data from a csv file and populates accordingly.-->
             <p>
-              Risks and issues below:
+              Risks below:
             </p>
-            <h1>Program Name Project Risks and Issues</h1>
+            <h1>Program Name Project Risks </h1>
             <div class="scrollable">
               <table id="risksTable">
                 <thead>
@@ -96,9 +96,30 @@
                 <tbody></tbody>
               </table>
             </div>
-            <input type="file" id="csvFileInputRisks" onchange="loadCSVForRisksAndIssues()">
-            <button onclick="saveEditsForRisksAndIssues()">Save Edits</button>
           </div>
+          <div class="content">
+            <!--Area for Risk and Issues tab, this portion fetches data from a csv file and populates accordingly.-->
+                    <p>
+                      Issues below:
+                    </p>
+                    <h1>Program Name Project Issues</h1>
+                    <div class="scrollable">
+                      <table id="issuesTable">
+                        <thead>
+                          <tr>
+                            <th>Task Name</th>
+                            <th>Status</th>
+                            <th>Start date</th>
+                            <th>Tentative end date</th>
+                            <th>Assigned to:</th>
+                            <th>Progress</th>
+                            <th>Description</th>
+                          </tr>
+                        </thead>
+                        <tbody></tbody>
+                      </table>
+                    </div>
+                  </div>
          <div class="content">
 
       <p>
