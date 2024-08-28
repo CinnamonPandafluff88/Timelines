@@ -75,14 +75,14 @@ function populateTable(tasks) {
         // Access attributes safely using conditionals
         const groupName = task.attributes.Group && task.attributes.Group.name ? task.attributes.Group.name : 'N/A';
 
-        row.innerHTML = `
-            <td>${task.attributes.Name}</td> 
-            <td>${task.attributes.AssignedTo ? task.attributes.AssignedTo.map(a => a.fullName).join(', ') : 'Unassigned'}</td> 
-            <td>${task.attributes.StartDate}</td> 
-            <td>${task.attributes.DueDate}</td> 
-            <td>${task.attributes.Progress}</td> 
-            <td>${groupName}</td> 
-        `;
+      row.innerHTML = `
+    <td>${task.attributes.Name}</td> 
+    <td>${task.attributes.AssignedTo ? task.attributes.AssignedTo.map(a => a.fullName).join(', ') : 'Unassigned'}</td> 
+    <td>${new Date(task.attributes.StartDate).toLocaleDateString()}</td>  // Format Start Date
+    <td>${new Date(task.attributes.DueDate).toLocaleDateString()}</td>  // Format Due Date
+    <td>${task.attributes.Progress}</td> 
+    <td>${groupName}</td> 
+`;
         tableBody.appendChild(row);
     });
 }
