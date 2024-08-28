@@ -15,9 +15,8 @@ function fetchProjectData() {
             }
             return response.json();
         })
-            //CONSOLE LOG FOR TABLE
         .then(data => {
-            console.log('Fetched data:', data.data.data); // Log the data to inspect its structure
+            console.log('Fetched data:', data.data); // Log the data to inspect its structure
             populateTable(data.data); // Access the 'data' property
         })
         .catch(error => console.error('Error fetching data:', error));
@@ -68,13 +67,13 @@ function populateTable(tasks) {
     tasks.forEach(task => {
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td>${task.Title}</td> 
-            <td>${task.Status}</td> 
-            <td>${task.StartDate}</td> 
-            <td>${task.DueDate}</td> 
-            <td>${task.AssignedTo || 'Unassigned'}</td> 
-            <td>${task.Progress}</td> 
-            <td>${task.Description || 'No Description'}</td> 
+            <td>${task.attributes.Name}</td> 
+            <td>${task.attributes.Status}</td> 
+            <td>${task.attributes.Progress}</td> 
+            <td>${task.attributes.Group.name}</td> 
+            <td>${task.attributes.IsMilestone}</td> 
+            <td>${task.attributes.Priority}</td> 
+            <td>${task.attributes.Predecessor.length > 0 ? task.attributes.Predecessor.join(', ') : 'None'}</td> 
         `;
         tableBody.appendChild(row);
     });
