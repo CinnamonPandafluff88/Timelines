@@ -15,6 +15,7 @@ function fetchProjectData() {
             }
             return response.json();
         })
+            //CONSOLE.LOG
         .then(data => {
             console.log('Fetched data:', data.data); // Log the data to inspect its structure
             populateTable(data.data); // Access the 'data' property
@@ -73,7 +74,7 @@ function populateTable(tasks) {
             <td>${task.attributes.Group.name}</td> 
             <td>${task.attributes.IsMilestone}</td> 
             <td>${task.attributes.Priority}</td> 
-            <td>${task.attributes.Predecessor.length > 0 ? task.attributes.Predecessor.join(', ') : 'None'}</td> 
+            <td>${task.attributes.Predecessor.length > 0 ? task.attributes.Predecessor.map(pre => pre.name).join(', ') : 'None'}</td> 
         `;
         tableBody.appendChild(row);
     });
