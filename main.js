@@ -115,13 +115,15 @@ function loadCSVForRisks() {
         rows.forEach((row, index) => {
             if (index === 0 || row.trim() === '') return; // Skip header row and empty rows
             const cols = row.split(',');
-            const newRow = table.insertRow();
 
-            // Only include specified headers
-            const headers = ['Title', 'Probability', 'Status', 'Category', 'Description'];
-            headers.forEach(header => {
+            // Map CSV columns to the desired headers
+            const [title, probability, status, category, , description] = cols;
+
+            const newRow = table.insertRow();
+            const cells = [title, probability, status, category, description];
+            cells.forEach(cellData => {
                 const cell = newRow.insertCell();
-                cell.textContent = cols[headers.indexOf(header)].trim();
+                cell.textContent = cellData.trim();
             });
         });
     };
@@ -144,17 +146,20 @@ function loadCSVForIssues() {
         rows.forEach((row, index) => {
             if (index === 0 || row.trim() === '') return; // Skip header row and empty rows
             const cols = row.split(',');
-            const newRow = table.insertRow();
 
-            // Only include specified headers
-            const headers = ['Title', 'Priority', 'Due date', 'Status', 'Category', 'Description'];
-            headers.forEach(header => {
+            // Map CSV columns to the desired headers
+            const [title, priority, dueDate, , status, category, description] = cols;
+
+            const newRow = table.insertRow();
+            const cells = [title, priority, dueDate, status, category, description];
+            cells.forEach(cellData => {
                 const cell = newRow.insertCell();
-                cell.textContent = cols[headers.indexOf(header)].trim();
+                cell.textContent = cellData.trim();
             });
         });
     };
 
     reader.readAsText(file);
 }
+
 
