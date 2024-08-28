@@ -16,10 +16,14 @@ function fetchProjectData() {
             return response.json();
         })
             //CONSOLE.LOG
-        .then(data => {
-            console.log('Fetched data:', data.data); // Log the data to inspect its structure
-            populateTable(data.data); // Access the 'data' property
-        })
+            function fetchProjectData() {
+    // ... (rest of your code)
+
+    .then(data => {
+        console.log('Fetched data:', data.data); // Log the data to inspect its structure
+        populateTable(data.data); // Access the 'data' property
+    })
+    // ... (rest of your code)
         .catch(error => console.error('Error fetching data:', error));
     } else {
         alert('Invalid project ID');
