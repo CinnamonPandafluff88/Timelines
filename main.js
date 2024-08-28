@@ -100,3 +100,55 @@ document.addEventListener('DOMContentLoaded', function() {
         line.style.left = activeTab.offsetLeft + "px";
     }
 });
+// Function to load CSV data for Risks 
+function loadCSVForRisks() {
+    const input = document.getElementById('csvFileInputRisks');
+    const file = input.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+        const text = e.target.result;
+        const rows = text.split('\n');
+        const table = document.getElementById('risksTable').getElementsByTagName('tbody')[0];
+        table.innerHTML = ''; // Clear existing rows
+
+        rows.forEach((row, index) => {
+            if (index === 0 || row.trim() === '') return; // Skip header row and empty rows
+            const cols = row.split(',');
+            const newRow = table.insertRow();
+            cols.forEach(col => {
+                const cell = newRow.insertCell();
+                cell.textContent = col.trim();
+                cell.setAttribute('contenteditable', 'true'); // Make cell editable
+            });
+        });
+    };
+
+    reader.readAsText(file);
+}
+// Function to load CSV data for Issues
+function loadCSVForIssues() {
+    const input = document.getElementById('csvFileInputIssues');
+    const file = input.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+        const text = e.target.result;
+        const rows = text.split('\n');
+        const table = document.getElementById('issuesTable').getElementsByTagName('tbody')[0];
+        table.innerHTML = ''; // Clear existing rows
+
+        rows.forEach((row, index) => {
+            if (index === 0 || row.trim() === '') return; // Skip header row and empty rows
+            const cols = row.split(',');
+            const newRow = table.insertRow();
+            cols.forEach(col => {
+                const cell = newRow.insertCell();
+                cell.textContent = col.trim();
+                cell.setAttribute('contenteditable', 'true'); // Make cell editable
+            });
+        });
+    };
+
+    reader.readAsText(file);
+}
