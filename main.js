@@ -81,8 +81,8 @@ const dueDate = new Date(task.attributes.DueDate);
 row.innerHTML = `
     <td>${task.attributes.Name}</td> 
     <td>${task.attributes.AssignedTo ? task.attributes.AssignedTo.map(a => a.fullName).join(', ') : 'Unassigned'}</td> 
-    <td>${startDate.getMonth() + 1}/${startDate.getDate()}/${startDate.getFullYear()}</td> // MM/DD/YYYY format
-    <td>${dueDate.getMonth() + 1}/${dueDate.getDate()}/${dueDate.getFullYear()}</td> // MM/DD/YYYY format
+    <td>${startDate.getMonth() + 1}/${startDate.getDate()}/${startDate.getFullYear()}</td> 
+    <td>${dueDate.getMonth() + 1}/${dueDate.getDate()}/${dueDate.getFullYear()}</td> 
     <td>${task.attributes.Progress}</td> 
     <td>${groupName}</td> 
 `;
