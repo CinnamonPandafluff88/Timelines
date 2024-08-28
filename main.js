@@ -78,8 +78,8 @@ function populateTable(tasks) {
       row.innerHTML = `
     <td>${task.attributes.Name}</td> 
     <td>${task.attributes.AssignedTo ? task.attributes.AssignedTo.map(a => a.fullName).join(', ') : 'Unassigned'}</td> 
-    <td>${new Date(task.attributes.StartDate).toLocaleDateString()}</td>  // Format Start Date
-    <td>${new Date(task.attributes.DueDate).toLocaleDateString()}</td>  // Format Due Date
+    <td>${new Date(task.attributes.StartDate).toLocaleDateString()}</td>  
+    <td>${new Date(task.attributes.DueDate).toLocaleDateString()}</td>
     <td>${task.attributes.Progress}</td> 
     <td>${groupName}</td> 
 `;
