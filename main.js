@@ -1,3 +1,4 @@
+// Declare fetchProjectData outside the event listener
 function fetchProjectData() {
     const projectUrl = document.getElementById('projectIdInput').value;
     const tenant = 'liquid'; // Replace with your tenant name
@@ -25,15 +26,6 @@ function fetchProjectData() {
         .catch(error => console.error('Error fetching data:', error));
     } else {
         alert('Invalid project URL');
-    }
-}
-        .then(data => {
-            console.log('Fetched data:', data.data); // Log the data to inspect its structure
-            populateTable(data.data); // Access the 'data' property
-        })
-        .catch(error => console.error('Error fetching data:', error));
-    } else {
-        alert('Invalid project ID');
     }
 }
 
