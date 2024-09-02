@@ -1,84 +1,35 @@
-// Function to fetch tasks
-function fetchProjectTasks(projectId, tenant) {
-    return fetch(`https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/${tenant}/${projectId}/tasks`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Fetched tasks:', data.data); 
-        populateTasksTable(data.data);
-    })
-    .catch(error => {
-        console.error('Error fetching tasks:', error);
-        alert('Failed to fetch tasks. Please try again later.');
-    });
-}
-
-
-// Function to fetch all data
-function fetchAllProjectData() {
-    const projectUrl = document.getElementById('projectIdInput').value;
+function fetchProjectData() {
+    const projectId = document.getElementById('projectIdInput').value;
     const tenant = 'liquid'; // Replace with your tenant name
 
-    // Extract the project ID from the URL
-    const projectId = projectUrl.split('/').pop().split('?')[0];
-
     if (projectId) {
-        Promise.all([
-            fetchProjectTasks(projectId, tenant),
-        ])
-        .then(() => {
-            console.log('Fetched all project data successfully');
+        fetch(`https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/tasks/${tenant}/${projectId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
         })
-        .catch(error => console.error('Error fetching project data:', error));
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+            //CONSOLE.LOG
+        .then(data => {
+            console.log('Fetched data:', data.data); // Log the data to inspect its structure
+            populateTable(data.data); // Access the 'data' property
+        })
+        .catch(error => console.error('Error fetching data:', error));
     } else {
-        alert('Invalid project URL');
+        alert('Invalid project ID');
     }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Attach the event listener after the DOM is fully loaded
-    document.getElementById('fetchButton').addEventListener('click', fetchAllProjectData);
+    document.getElementById('fetchButton').addEventListener('click', fetchProjectData);
 
-    // Function to populate the tasks table 
-    function populateTasksTable(tasks) {
-        const tableBody = document.querySelector('#tasksTable tbody');
-        tableBody.innerHTML = ''; // Clear existing table data
-
-        if (!Array.isArray(tasks)) {
-            console.error('Expected an array but got:', tasks);
-            return;
-        }
-
-        tasks.forEach(task => {
-            const row = document.createElement('tr');
-
-            // Access attributes safely using conditionals
-            const groupName = task.attributes.Group?.name ?? 'N/A';
-            const startDate = new Date(task.attributes.StartDate);
-            const dueDate = new Date(task.attributes.DueDate);
-
-            row.innerHTML = `
-                <td>${task.attributes.Name}</td> 
-                <td>${task.attributes.AssignedTo ? task.attributes.AssignedTo.map(a => a.fullName).join(', ') : 'Unassigned'}</td> 
-                <td>${startDate.getMonth() + 1}/${startDate.getDate()}/${startDate.getFullYear()}</td> 
-                <td>${dueDate.getMonth() + 1}/${dueDate.getDate()}/${dueDate.getFullYear()}</td> 
-                <td>${task.attributes.Progress}</td> 
-                <td>${groupName}</td> 
-            `;
-
-            tableBody.appendChild(row);
-        });
-    }
-        // Tab functionality
+    // Tab functionality
     const tabs = document.querySelectorAll('.tab_btn');
     const all_content = document.querySelectorAll('.content');
     const line = document.querySelector('.line');
@@ -103,3 +54,28 @@ document.addEventListener('DOMContentLoaded', function() {
         line.style.left = activeTab.offsetLeft + "px";
     }
 });
+
+// Function to populate the tasks table 
+function populateTable(tasks) {
+    const tableBody = document.querySelector('#tasksTable tbody');
+    tableBody.innerHTML = ''; // Clear existing table data
+
+    if (!Array.isArray(tasks)) {
+        console.error('Expected an array but got:', tasks);
+        return;
+    }
+
+    tasks.forEach(task => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${task.attributes.Name}</td> 
+            <td>${task.attributes.Status}</td> 
+            <td>${task.attributes.Progress}</td> 
+            <td>${task.attributes.Group.name}</td> 
+            <td>${task.attributes.IsMilestone}</td> 
+            <td>${task.attributes.Priority}</td> 
+            <td>${task.attributes.Predecessor.length > 0 ? task.attributes.Predecessor.map(pre => pre.name).join(', ') : 'None'}</td> 
+        `;
+        tableBody.appendChild(row);
+    });
+}
