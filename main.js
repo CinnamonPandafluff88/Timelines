@@ -1,6 +1,6 @@
 // Function to fetch tasks
 function fetchProjectTasks(projectId, tenant) {
-    return fetch(`https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/${tenant}/${projectId}/tasks`, {
+    return fetch(`https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/tasks/${tenant}/${projectId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
