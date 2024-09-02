@@ -54,20 +54,20 @@ function fetchAllProjectData() {
     const projectUrl = document.getElementById('projectIdInput').value;
     const tenant = 'liquid'; // Replace with your tenant name
 
-// Extract the project ID from the URL
+    // Extract the project ID from the URL
+    const projectId = projectUrl.split('/').pop().split('?')[0];
 
-if (projectId) {
-    Promise.all([
-        fetchProjectTasks(projectId, tenant),
-       
-    ])
-    .then(() => {
-        console.log('Fetched all project data successfully');
-    })
-    .catch(error => console.error('Error fetching project data:', error));
-} else {
-    alert('Invalid project URL');
-}
+    if (projectId) {
+        Promise.all([
+            fetchProjectTasks(projectId, tenant),
+        ])
+        .then(() => {
+            console.log('Fetched all project data successfully');
+        })
+        .catch(error => console.error('Error fetching project data:', error));
+    } else {
+        alert('Invalid project URL');
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
