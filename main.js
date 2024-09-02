@@ -1,6 +1,6 @@
 // Function to fetch tasks
 function fetchProjectTasks(projectId, tenant) {
-    return fetch(`https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/tasks/${tenant}/${projectId}`, {
+    return fetch(`https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/${tenant}/${projectId}/tasks`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -49,7 +49,7 @@ function fetchProjectTasks(projectId, tenant) {
       tableBody.appendChild(row);
     });
   }
-  
+
   // Function to fetch project details (including program name)
   function fetchProjectDetails(projectId, tenant) {
     return fetch(`https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/projects/${tenant}/${projectId}`, {
