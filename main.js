@@ -22,6 +22,7 @@ function fetchProjectTasks(projectId, tenant) {
     });
 }
 
+
 // Function to fetch all data
 function fetchAllProjectData() {
     const projectUrl = document.getElementById('projectIdInput').value;
