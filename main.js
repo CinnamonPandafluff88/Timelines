@@ -75,30 +75,30 @@ document.addEventListener('DOMContentLoaded', function() {
     // Attach the event listener after the DOM is fully loaded
     document.getElementById('fetchButton').addEventListener('click', fetchAllProjectData);
 
-    // Tab functionality
-    const tabs = document.querySelectorAll('.tab_btn');
-    const all_content = document.querySelectorAll('.content');
-    const line = document.querySelector('.line');
+   // Tab functionality
+   const tabs = document.querySelectorAll('.tab_btn');
+   const all_content = document.querySelectorAll('.content');
+   const line = document.querySelector('.line');
 
-    tabs.forEach((tab, index) => {
-        tab.addEventListener('click', () => {
-            tabs.forEach(tab => { tab.classList.remove('active') });
-            tab.classList.add('active');
+   tabs.forEach((tab, index) => {
+       tab.addEventListener('click', () => {
+           tabs.forEach(tab => { tab.classList.remove('active') });
+           tab.classList.add('active');
 
-            line.style.width = tab.offsetWidth + "px";
-            line.style.left = tab.offsetLeft + "px";
+           line.style.width = tab.offsetWidth + "px";
+           line.style.left = tab.offsetLeft + "px";
 
-            all_content.forEach(content => { content.classList.remove('active') });
-            all_content[index].classList.add('active');
-        });
-    });
+           all_content.forEach(content => { content.classList.remove('active') });
+           all_content[index].classList.add('active');
+       });
+   });
 
-    // Initialize the line position
-    const activeTab = document.querySelector('.tab_btn.active');
-    if (activeTab) {
-        line.style.width = activeTab.offsetWidth + "px";
-        line.style.left = activeTab.offsetLeft + "px";
-    }
+   // Initialize the line position
+   const activeTab = document.querySelector('.tab_btn.active');
+   if (activeTab) {
+       line.style.width = activeTab.offsetWidth + "px";
+       line.style.left = activeTab.offsetLeft + "px";
+   }
 });
 // Function to load CSV data for Risks 
 function loadCSVForRisks() {
@@ -123,7 +123,13 @@ function loadCSVForRisks() {
             });
         });
     };
- function loadCSVForIssues() {
+}
+ // Function to load CSV data for Issues
+function loadCSVForIssues() {
+    const input = document.getElementById('csvFileInputIssues');
+    const file = input.files[0];
+    const reader = new FileReader();
+
     reader.onload = function(e) {
         const text = e.target.result;
         const rows = text.split('\n');
@@ -142,6 +148,7 @@ function loadCSVForRisks() {
             });
         });
     };
+
     reader.readAsText(file);
 }
-}
+
