@@ -7,7 +7,7 @@ function fetchProjectData() {
     const projectId = projectUrl.split('/').pop().split('?')[0];
 
     if (projectId) {
-        fetch(`https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/${tenant}/${projectId}/tasks`, {
+        fetch(`https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/tasks/${tenant}/${projectId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -86,4 +86,3 @@ function populateTable(tasks) {
         tableBody.appendChild(row);
     });
 }
-
