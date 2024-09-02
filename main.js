@@ -80,14 +80,21 @@ function fetchProjectTasks(projectId, tenant) {
     const projectId = projectUrl.split('/').pop().split('?')[0];
   
     if (projectId) {
-      Promise.all([
-        fetchProjectTasks(projectId, tenant),
-        fetchProjectDetails(projectId, tenant) // Fetch project details separately
-      ])
-      .then(() => {
-        console.log('Fetched all project data successfully');
-      })
-      .catch(error => console.error('Error fetching project data:', error));
+      // Fetch project details first
+      fetchProjectDetails(projectId, tenant)
+        .then(projectData => {
+          // Update program name
+          updateProgramName(projectData.data.attributes.Program[0].name);
+  
+          // Then fetch tasks
+          return fetchProjectTasks(projectId, tenant);
+        })
+        .then(tasksData => {
+          // Populate tasks table
+          populateTasksTable(tasksData.data);
+          console.log('Fetched all project data successfully');
+        })
+        .catch(error => console.error('Error fetching project data:', error));
     } else {
       alert('Invalid project URL');
     }
