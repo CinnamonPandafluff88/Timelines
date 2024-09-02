@@ -19,27 +19,6 @@ function fetchProjectTasks(projectId, tenant) {
     .catch(error => console.error('Error fetching tasks:', error));
   }
   
-  // Function to fetch project details (including program name)
-  function fetchProjectDetails(projectId, tenant) {
-    return fetch(`https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/projects/${tenant}/${projectId}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log('Fetched project details:', data.data);
-      updateProgramName(data.data.attributes.Program[0].name); // Update program name
-    })
-    .catch(error => console.error('Error fetching project details:', error));
-  }
-  
   // Function to populate the tasks table 
   function populateTasksTable(tasks) {
     const tableBody = document.querySelector('#tasksTable tbody');
@@ -69,6 +48,27 @@ function fetchProjectTasks(projectId, tenant) {
   
       tableBody.appendChild(row);
     });
+  }
+  
+  // Function to fetch project details (including program name)
+  function fetchProjectDetails(projectId, tenant) {
+    return fetch(`https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/projects/${tenant}/${projectId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Fetched project details:', data.data);
+      updateProgramName(data.data.attributes.Program[0].name); // Update program name
+    })
+    .catch(error => console.error('Error fetching project details:', error));
   }
   
   // Function to fetch all data
