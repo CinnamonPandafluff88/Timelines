@@ -49,7 +49,7 @@ function fetchProjectTasks(projectId, tenant) {
       tableBody.appendChild(row);
     });
   }
-
+  
   // Function to fetch project details (including program name)
   function fetchProjectDetails(projectId, tenant) {
     return fetch(`https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/projects/${tenant}/${projectId}`, {
@@ -154,6 +154,7 @@ function fetchProjectTasks(projectId, tenant) {
       rows.forEach((row, index) => {
         if (index === 0 || row.trim() === '') return; // Skip header row and empty rows
         const cols = row.split(',');
+        const newRow = table.insertRow();
         cols.forEach(col => {
           const cell = newRow.insertCell();
           cell.textContent = col.trim();
@@ -161,8 +162,11 @@ function fetchProjectTasks(projectId, tenant) {
         });
       });
     };
+  
+    reader.readAsText(file);
   }
-   // Function to load CSV data for Issues
+  
+  // Function to load CSV data for Issues
   function loadCSVForIssues() {
     const input = document.getElementById('csvFileInputIssues');
     const file = input.files[0];
