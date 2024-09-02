@@ -13,11 +13,31 @@ function fetchProjectTasks(projectId, tenant) {
       return response.json();
     })
     .then(data => {
-      console.log('Fetched tasks:', data.data);
+      console.log('Fetched tasks:', data.data); 
       populateTasksTable(data.data);
-      updateProgramName(data.data.attributes.Program[0].name); // Update program name
     })
     .catch(error => console.error('Error fetching tasks:', error));
+  }
+  
+  // Function to fetch project details (including program name)
+  function fetchProjectDetails(projectId, tenant) {
+    return fetch(`https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/projects/${tenant}/${projectId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Fetched project details:', data.data);
+      updateProgramName(data.data.attributes.Program[0].name); // Update program name
+    })
+    .catch(error => console.error('Error fetching project details:', error));
   }
   
   // Function to populate the tasks table 
@@ -62,6 +82,7 @@ function fetchProjectTasks(projectId, tenant) {
     if (projectId) {
       Promise.all([
         fetchProjectTasks(projectId, tenant),
+        fetchProjectDetails(projectId, tenant) // Fetch project details separately
       ])
       .then(() => {
         console.log('Fetched all project data successfully');
