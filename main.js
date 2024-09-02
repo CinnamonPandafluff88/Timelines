@@ -49,26 +49,54 @@ function populateTasksTable(tasks) {
         tableBody.appendChild(row);
     });
 }
+// Function to fetch program details
+function fetchProgramDetails(programId, tenant) {
+    return fetch(`https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/${tenant}/v1.0/Programs/${programId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Fetched program:', data);
+        updateProgramName(data.name); // Assuming the program name is in the 'name' field
+    })
+    .catch(error => console.error('Error fetching program details:', error));
+}
 
+// Function to update the program name in the heading
+function updateProgramName(programName) {
+    const heading = document.querySelector('h1');
+    heading.textContent = `${programName} Project Timelines`;
+}
 // Function to fetch all data
 function fetchAllProjectData() {
     const projectUrl = document.getElementById('projectIdInput').value;
     const tenant = 'liquid'; // Replace with your tenant name
 
-    // Extract the project ID from the URL
-    const projectId = projectUrl.split('/').pop().split('?')[0];
+// Extract the project ID and program ID from the URL
+const urlParts = projectUrl.split('/');
+const projectId = urlParts[urlParts.length - 2]; // Assuming project ID is second last
+const programId = urlParts[urlParts.length - 1]; // Assuming program ID is last
 
-    if (projectId) {
-        Promise.all([
-            fetchProjectTasks(projectId, tenant),
-        ])
-        .then(() => {
-            console.log('Fetched all project data successfully');
-        })
-        .catch(error => console.error('Error fetching project data:', error));
-    } else {
-        alert('Invalid project URL');
-    }
+if (projectId && programId) {
+    Promise.all([
+        fetchProjectTasks(projectId, tenant),
+        fetchProgramDetails(programId, tenant) // Fetch program details
+    ])
+    .then(() => {
+        console.log('Fetched all project data successfully');
+    })
+    .catch(error => console.error('Error fetching project data:', error));
+} else {
+    alert('Invalid project URL');
+}
 }
 
 document.addEventListener('DOMContentLoaded', function() {
