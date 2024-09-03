@@ -93,7 +93,7 @@ function fetchProjectDetails(projectId, tenant) {
         })
         .then(tasksData => {
           // Populate tasks table
-          populateTasksTable(taskData.data);
+          populateTasksTable(tasksData.data);
           console.log('Fetched all project data successfully');
         })
         .catch(error => console.error('Error fetching project data:', error));
