@@ -225,3 +225,17 @@ input[type="submit"]:hover {
   padding: 5px; /* Add some padding */
   border-radius: 3px; /* Optional: Add rounded corners */
 }
+/* Style for the Update Tasks button */
+#updateTasksButton {
+  background-color: #4CAF50; 
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+#updateTasksButton:hover {
+  background-color: #45a049; 
+}
