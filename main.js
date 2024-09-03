@@ -34,6 +34,7 @@ function populateTasksTable(tasks) {
 
   tasks.forEach((task) => {
     const row = document.createElement("tr");
+    const groupName = task.attributes.Group?.name ?? "N/A";
     const startDate = new Date(task.attributes.StartDate);
     const dueDate = new Date(task.attributes.DueDate);
 
@@ -42,6 +43,12 @@ function populateTasksTable(tasks) {
 
     // Use input fields for editable table data
     row.innerHTML = `
+      <td>${task.attributes.Name}</td> 
+      <td>${
+        task.attributes.AssignedTo
+          ? task.attributes.AssignedTo.map((a) => a.fullName).join(", ")
+          : "Unassigned"
+      }</td>
       <td>
         <input
           type="date"
@@ -146,10 +153,11 @@ function updateAllTasks() {
     const taskProgressInput = row.querySelector(".task-progress");
 
     const updateData = {
-      name: taskNameInput ? taskNameInput.value : null,
-      startDate: taskStartDateInput ? taskStartDateInput.value : null,
-      dueDate: taskDueDateInput ? taskDueDateInput.value : null,
-      progress: taskProgressInput ? taskProgressInput.value : null,
+      startDate: taskStartDateInput
+        ? taskStartDateInput.value
+        : task.attributes.StartDate,
+      dueDate: taskDueDateInput ? taskDueDateInput.value : task.attributes.DueDate,
+      progress: taskProgressInput ? taskProgressInput.value : task.attributes.Progress,
     };
 
     updateTask(taskId, updateData, tenant);
@@ -211,7 +219,7 @@ function createNewTask(taskName, projectId, tenant) {
       const newTaskRow = document.createElement("tr");
       newTaskRow.dataset.taskId = newTaskId;
       newTaskRow.innerHTML = `
-      <td><input type="text" value="${newTaskName}" data-task-id="${newTaskId}" class="task-name"></td>
+      <td>${newTaskName}</td>
       <td>Unassigned</td> 
       <td><input type="date" value="" data-task-id="${newTaskId}" class="task-start-date"></td>
       <td><input type="date" value="" data-task-id="${newTaskId}" class="task-due-date"></td>
