@@ -66,7 +66,7 @@ function fetchProjectDetails(projectId, tenant) {
   })
   .then(data => {
     console.log('Fetched project details:', data.data);
-    const projectName = data.data.attributes.ClientName[0].name;
+    const projectName = data.data.data.attributes.ClientName[0].name;
     const programName = data.data.attributes.Program[0].name;
     updateProgramName(`${projectName} - ${programName}`); // Concatenate and update program name
     return data; // Return the project data
