@@ -14,7 +14,7 @@ function fetchProjectTasks(projectId, tenant) {
     })
     .then(data => {
       console.log('Fetched tasks:', data.data); 
-      populateTasksTable(data.data);
+     return data;
     })
     .catch(error => console.error('Error fetching tasks:', error));
   }
