@@ -167,11 +167,10 @@ input[type="submit"]:hover {
 .tab_box .tab_btn.active {
   color: #cdafea;
 }
-
 .content_box {
   width: 100%;
   padding: 20px;
-  padding-bottom: 80px; /* Increase bottom padding */
+  min-height: 400px; /* Set a minimum height */
 }
 
 .content_box .content {
@@ -187,6 +186,7 @@ input[type="submit"]:hover {
 .content_box .content.active {
   display: block;
 }
+
 
 .line {
   position: absolute;
