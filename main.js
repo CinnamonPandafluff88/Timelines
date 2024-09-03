@@ -66,9 +66,9 @@ function fetchProjectDetails(projectId, tenant) {
   })
   .then(data => {
     console.log('Fetched project details:', data.data);
-    const projectName = data.data.data.attributes.ClientName[0].name;
+    const clientName = data.data.attributes.ClientName;
     const programName = data.data.attributes.Program[0].name;
-    updateProgramName(`${projectName} - ${programName}`); // Concatenate and update program name
+    updateProgramName(`${clientName} - ${programName}`); // Concatenate and update program name
     return data; // Return the project data
   })
   .catch(error => console.error('Error fetching project details:', error));
@@ -152,20 +152,17 @@ function loadCSVForRisks() {
     table.innerHTML = ''; // Clear existing rows
 
     rows.forEach((row, index) => {
-      if (index === 0 || row.trim() === '') return; // Skip header row and empty rows
-      const cols = row.split(',');
-      const newRow = table.insertRow();
-      cols.forEach(col => {
-        const cell = newRow.insertCell();
-        cell.textContent = col.trim();
+        if (index === 0 || row.trim() === '') return; // Skip header row and empty rows
+        const cols = row.split(',');
+        const newRow = table.insertRow();
+        cols.forEach(col => {
+          const cell = newRow.insertCell();
+          cell.textContent = col.trim();
+          cell.setAttribute('contenteditable', 'true'); // Make cell editable
+        });
       });
-    });
-  };
-
-  reader.readAsText(file);
-}
-
-// Function to load CSV data for Issues
+    };
+  // Function to load CSV data for Issues
 function loadCSVForIssues() {
   const input = document.getElementById('csvFileInputIssues');
   const file = input.files[0];
@@ -179,15 +176,16 @@ function loadCSVForIssues() {
     table.innerHTML = ''; // Clear existing rows
 
     rows.forEach((row, index) => {
-      if (index === 0 || row.trim() === '') return; // Skip header row and empty rows
-      const cols = row.split(',');
-      const newRow = table.insertRow();
-      cols.forEach(col => {
-        const cell = newRow.insertCell();
-        cell.textContent = col.trim();
+        if (index === 0 || row.trim() === '') return; // Skip header row and empty rows
+        const cols = row.split(',');
+        const newRow = table.insertRow();
+        cols.forEach(col => {
+          const cell = newRow.insertCell();
+          cell.textContent = col.trim();
+          cell.setAttribute('contenteditable', 'true'); // Make cell editable
+        });
       });
-    });
-  };
-
-  reader.readAsText(file);
+    };
 }
+    reader.readAsText(file);
+  }
