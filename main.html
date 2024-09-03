@@ -56,8 +56,7 @@
         The idea I came up with is the following: When we have a project in PPMx and we create project timelines, we only have to paste the link of the project below:
       </p>
       <input type="text" id="projectIdInput" placeholder="Enter Project ID">
-    <button id="fetchButton">Fetch Project Data</button> 
-      <h1>Program Name Project Timelines</h1>
+    <button id="fetchButton">Fetch Project Data</button>
       <div class="scrollable">
         <table id="tasksTable">
           <thead>
@@ -77,9 +76,8 @@
           <div class="content">
     <!--Area for Risk and Issues tab, this portion fetches data from a csv file and populates accordingly.-->
             <p>
-              Risks and issues below:
+              Risks below:
             </p>
-            <h1>Program Name Project Risks and Issues</h1>
             <div class="scrollable">
               <table id="risksTable">
                 <thead>
@@ -96,8 +94,28 @@
                 <tbody></tbody>
               </table>
             </div>
+            <div class="content">
+              <!--Area for Risk and Issues tab, this portion fetches data from a csv file and populates accordingly.-->
+                      <p>
+                        Issues below:
+                      </p>
+                      <div class="scrollable">
+                        <table id="issuesTable">
+                          <thead>
+                            <tr>
+                              <th>Task Name</th>
+                              <th>Status</th>
+                              <th>Start date</th>
+                              <th>Tentative end date</th>
+                              <th>Assigned to:</th>
+                              <th>Progress</th>
+                              <th>Description</th>
+                            </tr>
+                          </thead>
+                          <tbody></tbody>
+                        </table>
+                      </div>
             <input type="file" id="csvFileInputRisks" onchange="loadCSVForRisksAndIssues()">
-            <button onclick="saveEditsForRisksAndIssues()">Save Edits</button>
           </div>
          <div class="content">
 
