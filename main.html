@@ -56,7 +56,7 @@
         The idea I came up with is the following: When we have a project in PPMx and we create project timelines, we only have to paste the link of the project below:
       </p>
       <input type="text" id="projectIdInput" placeholder="Enter Project ID">
-    <button id="fetchButton">Fetch Project Data</button>
+    <button id="fetchButton">Fetch Project Data</button> 
       <div class="scrollable">
         <table id="tasksTable">
           <thead>
@@ -74,9 +74,9 @@
       </div>
     </div>
           <div class="content">
-    <!--Area for Risk and Issues tab, this portion fetches data from a csv file and populates accordingly.-->
+    <!--Area for Risk tab, this portion fetches data from a csv file and populates accordingly.-->
             <p>
-              Risks below:
+              Risks:
             </p>
             <div class="scrollable">
               <table id="risksTable">
@@ -94,31 +94,32 @@
                 <tbody></tbody>
               </table>
             </div>
-            <div class="content">
-              <!--Area for Risk and Issues tab, this portion fetches data from a csv file and populates accordingly.-->
-                      <p>
-                        Issues below:
-                      </p>
-                      <div class="scrollable">
-                        <table id="issuesTable">
-                          <thead>
-                            <tr>
-                              <th>Task Name</th>
-                              <th>Status</th>
-                              <th>Start date</th>
-                              <th>Tentative end date</th>
-                              <th>Assigned to:</th>
-                              <th>Progress</th>
-                              <th>Description</th>
-                            </tr>
-                          </thead>
-                          <tbody></tbody>
-                        </table>
-                      </div>
-            <input type="file" id="csvFileInputRisks" onchange="loadCSVForRisksAndIssues()">
+            <input type="file" id="csvFileInputRisks" onchange="loadCSVForRisks()">
           </div>
-         <div class="content">
-
+          <div class="content">
+    <!--Area for Risk tab, this portion fetches data from a csv file and populates accordingly.-->
+            <p>
+              Issues:
+            </p>
+            <div class="scrollable">
+              <table id="issuesTable">
+                <thead>
+                  <tr>
+                    <th>Task Name</th>
+                    <th>Status</th>
+                    <th>Start date</th>
+                    <th>Tentative end date</th>
+                    <th>Assigned to:</th>
+                    <th>Progress</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+            <input type="file" id="csvFileInputIssues" onchange="loadCSVForIssues()">
+          </div>
+ <div class="content">
       <p>
         <h3>Want to contact the PM for more information on where exactly your project is at?</h3>
         Please fill in the box below and we'll get in contact.
@@ -139,6 +140,5 @@
     </div>
     <script src="main.js"></script>
     </div>
-    </div>
-    </body>
+</body>
 </html>
