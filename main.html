@@ -5,16 +5,12 @@
     <title>Main</title>
     <link rel="stylesheet" type="text/css" href="main.css">
 </head>
-<div class ="heading">
-  <h1>Customer Name Program Name Project Timelines</h1>
-</div>
 <body>
     <div class="container">
         <div class="tab_box">
           <button class="tab_btn active">Landing</button>
           <button class="tab_btn">Timelines</button>
-          <button class="tab_btn">Risks</button>
-          <button class="tab_btn">Issues</button>
+          <button class="tab_btn">Risks and Issues</button>
           <button class="tab_btn">Contact us</button>
           <div class="line"></div>
         </div>
@@ -29,24 +25,24 @@
       <li><input type="checkbox" id="background" name="background" checked>Background changed to showcase the logo instead of hide it</li>
       <li><input type="checkbox" id="risks-issues" name="risks-issues" checked>Risks and issues tab</li>
       <li><input type="checkbox" id="api-integration" name="api-integration" checked>API integration</li>
-      <li><input type="checkbox" id="working-api" name="working-api" checked>Working API integration</li>
+      <li><input type="checkbox" id="working-api" name="working-api">Working API integration</li>
       <li><input type="checkbox" id="csv-loading" name="csv-loading" checked>CSV loading for risks and issues</li>
-      <li><input type="checkbox" id="display-link" name="display-link" checked>Displaying the fetched link with API integration on Timelines tab</li>
+      <li><input type="checkbox" id="display-link" name="display-link">Displaying the fetched link with API integration on Timelines tab</li>
       <li><input type="checkbox" id="contact-us" name="contact-us">Working Contact Us Portion</li>
-    <li><input type="checkbox" id="Program-Name" name="Program-Name">Working Program Name to populate from fetched URL Portion</li>
     </ul>
     
             </p>
             <br>
             <hr>
-            <p> Huge thanks to
+            <p> Big thanks to the following individuals for helping out in this cold, dark coding world
                 <ul class="flower-list">
-                <li>Fanie van Vuuren - The Cloudflare workers Access and introducing me to Postman</li>
-                <li>Steven Selelo - For helping me understand server side logic, and the Final array fix in my Javascript that actually got the tasks to populate</li>
+                <li>Fanie van Vuuren - assisting me in the REST API, testing and understanding of them, giving me access to the Cloudflare NFR (without this I don't know what would be of this project) I really wanted it to be free, and utilizing the business resources was a plus for me.</li>
+                <li>Tshepo Shale - correcting the portion of my code where I populate my table, making it easier to understand and not complicate life like how I was doing.</li>
+                <li>Steven Selelo - Helping me correct my header input for the API and correcting that portion of my JavaScript code, as well as recomending ways for me to correct the error I kept on getting which was frustrating, without his information and insight I don't think I would have been able to complete this project.</li>
                 <li>My team: Talu Mulaudzi, Murendeni Nematswerani, Babalwa Ngcwayi- for the continued support and belief</li>
-                <li>Honourable mentions: Chuma Raxothi; Tshepo Shale</li>
-            </ul>
-              </p>
+                <li>Honourable mentions: Chuma Raxothi - willing to assist me, redid my code to understand, built his own versoin to help me troubleshoot my error</li>            
+        </ul>
+            </p>
             <br>
             <hr>
             <p>
@@ -80,54 +76,28 @@
           <div class="content">
     <!--Area for Risk and Issues tab, this portion fetches data from a csv file and populates accordingly.-->
             <p>
-              Risks below:
+              Risks and issues below:
             </p>
-            <h1>Program Name Project Risks </h1>
+            <h1>Program Name Project Risks and Issues</h1>
             <div class="scrollable">
-              <input type="file" id="csvFileInputRisks" onchange="loadCSVForRisks()">  
               <table id="risksTable">
                 <thead>
                   <tr>
-                    <th>Title</th>
-            <th>Probability, %</th>
-            <th>Due Date</th>
-            <th>Assigned To</th>
-            <th>Status</th>
-            <th>Category</th>
-            <th>Cost</th>
-            <th>Description</th>
-            <th>ID</th>
+                    <th>Task Name</th>
+                    <th>Status</th>
+                    <th>Start date</th>
+                    <th>Tentative end date</th>
+                    <th>Assigned to:</th>
+                    <th>Progress</th>
+                    <th>Description</th>
                   </tr>
                 </thead>
                 <tbody></tbody>
               </table>
             </div>
+            <input type="file" id="csvFileInputRisks" onchange="loadCSVForRisksAndIssues()">
+            <button onclick="saveEditsForRisksAndIssues()">Save Edits</button>
           </div>
-          <div class="content">
-            <!--Area for Risk and Issues tab, this portion fetches data from a csv file and populates accordingly.-->
-                    <p>
-                      Issues below:
-                    </p>
-                    <h1>Program Name Project Issues</h1>
-                    <div class="scrollable">
-                      <input type="file" id="csvFileInputIssues" onchange="loadCSVForIssues()">
-                      <table id="issuesTable">
-                        <thead>
-                          <tr>
-                            <th>Title</th>
-                            <th>Priority</th>
-                            <th>Due Date</th>
-                            <th>Assigned To</th>
-                            <th>Status</th>
-                            <th>Category</th>
-                            <th>Description</th>
-                            <th>ID</th>
-                          </tr>
-                        </thead>
-                        <tbody></tbody>
-                      </table>
-                    </div>
-                  </div>
          <div class="content">
 
       <p>

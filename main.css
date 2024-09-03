@@ -6,6 +6,7 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
+
 body {
 background-image: url('/Logo.jpg'); 
   background-position: center;
@@ -17,20 +18,11 @@ background-image: url('/Logo.jpg');
   align-items: center;
   height: 100vh;
 }
-    table { 
-      width: 100%; 
-      border-collapse: collapse; }
-
-    th, td {
-       padding: 8px 12px;
-        border: 1px solid #ddd; }
-
+body
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 8px 12px; border: 1px solid #ddd; }
     th { background-color: #f4f4f4; }
-
-    .scrollable { 
-      overflow-y: auto; 
-      max-height: 200px; } /* Set a max height and enable vertical scrolling */
-
+    .scrollable { overflow-y: auto; max-height: 200px; } /* Set a max height and enable vertical scrolling */
     .transparent-box {
       background-color: rgba(241, 247, 250, 0.5); /* Semi-transparent background */
       padding: 30px;
@@ -112,12 +104,6 @@ background-image: url('/Logo.jpg');
 .check-lists li input[type="checkbox"] {
   margin-right: 10px;
 }
-/*Added the header portion so that customer name and program name can change*/
-.heading {
-  width: 100%;
-  text-align: center; /* Optional: Center the heading */
-  margin-bottom: 20px; /* Add some space between the heading and the container */
-}
 .container {
   width: 1500px;
   background-color: rgba(241, 247, 250, 0.5); /* Semi-transparent background */
@@ -129,9 +115,7 @@ background-image: url('/Logo.jpg');
   align-items: center;
 }
 
-/* ... rest of your styles ... */
-
-/* ... updated for Working Version 9... */
+/* ... updated for V13... */
 
 .tab_box {
     width: 100%;
