@@ -114,10 +114,11 @@ background-image: url('/Logo.jpg');
 }
 /*Added the header portion so that customer name and program name can change*/
 .heading {
-  position: relative; /* Or relative, depending on your layout */
+  position: relative;
   top: 0;
   width: 100%;
   padding: 10px;
+  text-align: center; /* Centers the heading's content */
 }
 .container {
   width: 1500px;
