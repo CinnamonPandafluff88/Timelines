@@ -6,7 +6,6 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
-
 body {
 background-image: url('/Logo.jpg'); 
   background-position: center;
@@ -18,11 +17,20 @@ background-image: url('/Logo.jpg');
   align-items: center;
   height: 100vh;
 }
-body
-    table { width: 100%; border-collapse: collapse; }
-    th, td { padding: 8px 12px; border: 1px solid #ddd; }
+    table { 
+      width: 100%; 
+      border-collapse: collapse; }
+
+    th, td {
+       padding: 8px 12px;
+        border: 1px solid #ddd; }
+
     th { background-color: #f4f4f4; }
-    .scrollable { overflow-y: auto; max-height: 200px; } /* Set a max height and enable vertical scrolling */
+
+    .scrollable { 
+      overflow-y: auto; 
+      max-height: 200px; } /* Set a max height and enable vertical scrolling */
+
     .transparent-box {
       background-color: rgba(241, 247, 250, 0.5); /* Semi-transparent background */
       padding: 30px;
@@ -104,6 +112,12 @@ body
 .check-lists li input[type="checkbox"] {
   margin-right: 10px;
 }
+/*Added the header portion so that customer name and program name can change*/
+.heading{
+  width: 1500px;
+  text-align: center;
+  margin-bottom: 20px;
+}
 .container {
   width: 1500px;
   background-color: rgba(241, 247, 250, 0.5); /* Semi-transparent background */
@@ -115,7 +129,7 @@ body
   align-items: center;
 }
 
-/* ... updated for V13... */
+/* ... updated for Working Version 9... */
 
 .tab_box {
     width: 100%;
