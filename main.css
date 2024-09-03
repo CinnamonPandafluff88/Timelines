@@ -8,7 +8,7 @@
 }
 
 body {
-background-image: url('/Logo.jpg'); 
+  background-image: url('/Logo.jpg'); 
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -18,78 +18,98 @@ background-image: url('/Logo.jpg');
   align-items: center;
   height: 100vh;
 }
-body
-    table { width: 100%; border-collapse: collapse; }
-    th, td { padding: 8px 12px; border: 1px solid #ddd; }
-    th { background-color: #f4f4f4; }
-    .scrollable { overflow-y: auto; max-height: 200px; } /* Set a max height and enable vertical scrolling */
-    .transparent-box {
-      background-color: rgba(241, 247, 250, 0.5); /* Semi-transparent background */
-      padding: 30px;
-      border-radius: 20px;
-      width: 600px;
-      margin: 0 auto;
-      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
-    }
 
-    form {
-      display: flex;
-      flex-direction: column;
-    }
-    label {
-      font-size: .825rem;
-      margin-bottom: .5rem;
-      padding-top: .2rem;
-      display: flex;
-      align-items: baseline;
-    }
-    textarea {
-      border: 1px solid rgba(0,0,0,0.2);
-      background-color: rgba(255,255,255,0.9);
-      padding: .75em 1rem;
-      margin-bottom: 1.5rem;
-      width: 100%;
-      resize: vertical;
-    }
-    textarea:focus {
-      background-color: white;
-      outline-style: solid;
-      outline-width: thin;
-      outline-color: gray;
-      outline-offset: -1px;
-    }
-    input[type="submit"] {
-      width: auto;
-      cursor: pointer;
-      padding: .75em 1rem;
-      background-color: rgba(0, 123, 255, 0.7); /* Semi-transparent background */
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 1rem;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Shadow for 3D effect */
-      transform: perspective(1px) translateZ(0); /* 3D effect */
-      transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
-    }
-    input[type="submit"]:hover {
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
-      transform: scale(1.05); /* Slight increase in size for 3D effect */
-    }
+table { 
+  width: 100%; 
+  border-collapse: collapse; 
+}
 
-    .flower-list {
-  list-style: none; /* Remove default bullets */
-  padding-left: 20px; /* Adjust padding to position the list items */
+th, td { 
+  padding: 8px 12px; 
+  border: 1px solid #ddd; 
+}
+
+th { 
+  background-color: #f4f4f4; 
+}
+
+.scrollable { 
+  overflow-y: auto; 
+  max-height: 200px; 
+}
+
+.transparent-box {
+  background-color: rgba(241, 247, 250, 0.5); 
+  padding: 30px;
+  border-radius: 20px;
+  width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: .825rem;
+  margin-bottom: .5rem;
+  padding-top: .2rem;
+  display: flex;
+  align-items: baseline;
+}
+
+textarea {
+  border: 1px solid rgba(0,0,0,0.2);
+  background-color: rgba(255,255,255,0.9);
+  padding: .75em 1rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  resize: vertical;
+}
+
+textarea:focus {
+  background-color: white;
+  outline-style: solid;
+  outline-width: thin;
+  outline-color: gray;
+  outline-offset: -1px;
+}
+
+input[type="submit"] {
+  width: auto;
+  cursor: pointer;
+  padding: .75em 1rem;
+  background-color: rgba(0, 123, 255, 0.7); 
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); 
+  transform: perspective(1px) translateZ(0); 
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+input[type="submit"]:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); 
+  transform: scale(1.05); 
+}
+
+.flower-list {
+  list-style: none; 
+  padding-left: 20px; 
 }
 
 .flower-list li {
   position: relative;
-  margin-bottom: 10px; /* Add space between list items */
+  margin-bottom: 10px; 
 }
 
 .flower-list li::before {
-  content: "🌻"; /* Flower emoji */
+  content: "🌻"; 
   position: absolute;
-  left: -20px; /* Position the emoji */
+  left: -20px; 
 }
 
 .check-lists {
@@ -104,9 +124,11 @@ body
 .check-lists li input[type="checkbox"] {
   margin-right: 10px;
 }
+
 .container {
-  width: 1500px;
-  background-color: rgba(241, 247, 250, 0.5); /* Semi-transparent background */
+  width: 90%; /* Default width for smaller screens */
+  max-width: 1500px; /* Maximum width for larger screens */
+  background-color: rgba(241, 247, 250, 0.5); 
   padding: 30px;
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
@@ -115,24 +137,22 @@ body
   align-items: center;
 }
 
-/* ... updated for Working Version 9... */
-.heading{
+.heading {
   text-align: center;
-  margin-bottom: 10px
+  margin-bottom: 10px;
 }
+
 .tab_box {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    border-bottom: 2px solid rgba(242, 247, 250, 1);
-    position: relative;
-    top: 0;
-    left: 0;
-    z-index: 1000; /* Ensure tabs are always on top */
-  }
-  
-  /* ... The above should fix the tabs not moving from V12 ... */
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 2px solid rgba(242, 247, 250, 1);
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 1000; 
+}
 
 .tab_box .tab_btn {
   font-size: 18px;
@@ -151,6 +171,7 @@ body
 .content_box {
   width: 100%;
   padding: 20px;
+  padding-bottom: 40px; /* Increase bottom padding */
 }
 
 .content_box .content {
@@ -176,4 +197,23 @@ body
   background-color: #cdafea;
   border-radius: 10px;
   transition: all 0.3s ease-in-out;
+}
+
+/* Media queries for responsiveness */
+@media (min-width: 768px) {
+  .container {
+    width: 80%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    width: 70%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 60%;
+  }
 }
