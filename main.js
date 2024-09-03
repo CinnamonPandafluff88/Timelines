@@ -51,25 +51,27 @@ function fetchProjectTasks(projectId, tenant) {
   }
   
   // Function to fetch project details (including program name)
-  function fetchProjectDetails(projectId, tenant) {
-    return fetch(`https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/projects/${tenant}/${projectId}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log('Fetched project details:', data.data);
-      updateProgramName(data.data.attributes.Program[0].name); // Update program name
-    })
-    .catch(error => console.error('Error fetching project details:', error));
-  }
+function fetchProjectDetails(projectId, tenant) {
+  return fetch(`https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/projects/${tenant}/${projectId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log('Fetched project details:', data.data);
+    updateProgramName(data.data.attributes.Program[0].name); // Update program name
+    return data; // Return the project data
+  })
+  .catch(error => console.error('Error fetching project details:', error));
+}
+
   
   // Function to fetch all data
   function fetchAllProjectData() {
