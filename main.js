@@ -1,6 +1,6 @@
-// Function to fetch project tasks
+// Function to fetch tasks
 function fetchProjectTasks(projectId, tenant) {
-  return fetch(`https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/tasks/${tenant}/${projectId}`, { // URL unchanged
+  return fetch(`https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/tasks/${tenant}/${projectId}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
@@ -19,10 +19,10 @@ function fetchProjectTasks(projectId, tenant) {
   .catch(error => console.error('Error fetching tasks:', error));
 }
 
-// Function to populate the tasks table (modified)
+// Function to populate the tasks table 
 function populateTasksTable(tasks) {
   const tableBody = document.querySelector('#tasksTable tbody');
-  tableBody.innerHTML = ''; 
+  tableBody.innerHTML = ''; // Clear existing table data
 
   if (!Array.isArray(tasks)) {
     console.error('Expected an array but got:', tasks);
@@ -31,27 +31,25 @@ function populateTasksTable(tasks) {
 
   tasks.forEach(task => {
     const row = document.createElement('tr');
+
+    // Access attributes safely using conditionals
     const groupName = task.attributes.Group?.name ?? 'N/A';
     const startDate = new Date(task.attributes.StartDate);
     const dueDate = new Date(task.attributes.DueDate);
-    
-    // Store the task ID in the row's dataset 
-    row.dataset.taskId = task.id; // Use the fetched task ID
 
-    // Use input fields for editable table data
     row.innerHTML = `
-      <td><input type="text" value="${task.attributes.Name}" data-task-id="${task.id}" class="task-name"></td>
-      <td>${task.attributes.AssignedTo ? task.attributes.AssignedTo.map(a => a.fullName).join(', ') : 'Unassigned'}</td>
-      <td><input type="date" value="${startDate.toISOString().slice(0, 10)}" data-task-id="${task.id}" class="task-start-date"></td>
-      <td><input type="date" value="${dueDate.toISOString().slice(0, 10)}" data-task-id="${task.id}" class="task-due-date"></td>
-      <td><input type="text" value="${task.attributes.Progress}" data-task-id="${task.id}" class="task-progress"></td>
-      <td>${groupName}</td>
+        <td>${task.attributes.Name}</td> 
+        <td>${task.attributes.AssignedTo ? task.attributes.AssignedTo.map(a => a.fullName).join(', ') : 'Unassigned'}</td> 
+        <td>${startDate.getMonth() + 1}/${startDate.getDate()}/${startDate.getFullYear()}</td> 
+        <td>${dueDate.getMonth() + 1}/${dueDate.getDate()}/${dueDate.getFullYear()}</td> 
+        <td>${task.attributes.Progress}</td> 
+        <td>${groupName}</td> 
     `;
 
     tableBody.appendChild(row);
   });
 }
-  
+
 // Function to fetch project details (including program name)
 function fetchProjectDetails(projectId, tenant) {
   return fetch(`https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/projects/${tenant}/${projectId}`, {
@@ -113,50 +111,6 @@ function updateProgramName(fullName) {
 document.addEventListener('DOMContentLoaded', function() {
   // Attach the event listener after the DOM is fully loaded
   document.getElementById('fetchButton').addEventListener('click', fetchAllProjectData);
-
-  // Function to gather updated data and send PATCH requests 
-  function updateAllTasks() {
-    const tenant = 'liquid'; 
-    const tableRows = document.querySelectorAll('#tasksTable tbody tr');
-
-    tableRows.forEach(row => {
-      const taskId = row.dataset.taskId; // Get the taskId from the row
-      const taskNameInput = row.querySelector('.task-name');
-      const taskStartDateInput = row.querySelector('.task-start-date');
-      const taskDueDateInput = row.querySelector('.task-due-date');
-      const taskProgressInput = row.querySelector('.task-progress');
-
-      const updateData = {
-        name: taskNameInput ? taskNameInput.value : null,
-        startDate: taskStartDateInput ? taskStartDateInput.value : null,
-        dueDate: taskDueDateInput ? taskDueDateInput.value : null,
-        progress: taskProgressInput ? taskProgressInput.value : null
-      };
-
-      updateTask(taskId, updateData, tenant);
-    });
-  }
-
-  // Function to update a task
-  function updateTask(taskId, updateData, tenant) {
-    return fetch(`/tasks/${tenant}/${taskId}`, { // Use taskId in the URL
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(updateData)
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log(`Task ${taskId} updated successfully:`, data);
-    })
-    .catch(error => console.error(`Error updating task ${taskId}:`, error));
-  }
 
   // Tab functionality
   const tabs = document.querySelectorAll('.tab_btn');
