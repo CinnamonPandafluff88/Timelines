@@ -167,7 +167,7 @@ function updateAllTasks() {
 // Function to update a task
 function updateTask(taskId, updateData, tenant) {
   return fetch(
-    `https://api-eu.ppm.express/@${tenant}/v1.0/tasks/${taskId}`, // Use your worker as a proxy
+    `https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/tasks/${tenant}/${taskId}`, // Use your worker as a proxy
     {
       method: "PATCH",
       headers: {
