@@ -113,10 +113,12 @@ background-image: url('/Logo.jpg');
   margin-right: 10px;
 }
 /*Added the header portion so that customer name and program name can change*/
-.heading{
-  width: 1500px;
-  text-align: center;
-  margin-bottom: 20px;
+.heading {
+  position: fixed; /* Or relative, depending on your layout */
+  top: 0;
+  width: 100%;
+  padding: 10px;
+margin-bottom: 20px;
 }
 .container {
   width: 1500px;
