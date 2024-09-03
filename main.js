@@ -1,4 +1,4 @@
-/ Function to fetch project tasks
+// Function to fetch project tasks
 function fetchProjectTasks(projectId, tenant) {
   return fetch(`https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/tasks/${tenant}/${projectId}`, { // URL unchanged
     method: 'GET',
@@ -114,49 +114,49 @@ document.addEventListener('DOMContentLoaded', function() {
   // Attach the event listener after the DOM is fully loaded
   document.getElementById('fetchButton').addEventListener('click', fetchAllProjectData);
 
-// Function to gather updated data and send PATCH requests 
-function updateAllTasks() {
-  const tenant = 'liquid'; 
-  const tableRows = document.querySelectorAll('#tasksTable tbody tr');
+  // Function to gather updated data and send PATCH requests 
+  function updateAllTasks() {
+    const tenant = 'liquid'; 
+    const tableRows = document.querySelectorAll('#tasksTable tbody tr');
 
-  tableRows.forEach(row => {
-    const taskId = row.dataset.taskId; // Get the taskId from the row
-    const taskNameInput = row.querySelector('.task-name');
-    const taskStartDateInput = row.querySelector('.task-start-date');
-    const taskDueDateInput = row.querySelector('.task-due-date');
-    const taskProgressInput = row.querySelector('.task-progress');
+    tableRows.forEach(row => {
+      const taskId = row.dataset.taskId; // Get the taskId from the row
+      const taskNameInput = row.querySelector('.task-name');
+      const taskStartDateInput = row.querySelector('.task-start-date');
+      const taskDueDateInput = row.querySelector('.task-due-date');
+      const taskProgressInput = row.querySelector('.task-progress');
 
-    const updateData = {
-      name: taskNameInput ? taskNameInput.value : null,
-      startDate: taskStartDateInput ? taskStartDateInput.value : null,
-      dueDate: taskDueDateInput ? taskDueDateInput.value : null,
-      progress: taskProgressInput ? taskProgressInput.value : null
-    };
+      const updateData = {
+        name: taskNameInput ? taskNameInput.value : null,
+        startDate: taskStartDateInput ? taskStartDateInput.value : null,
+        dueDate: taskDueDateInput ? taskDueDateInput.value : null,
+        progress: taskProgressInput ? taskProgressInput.value : null
+      };
 
-    updateTask(taskId, updateData, tenant);
-  });
-}
+      updateTask(taskId, updateData, tenant);
+    });
+  }
 
-// Function to update a task
-function updateTask(taskId, updateData, tenant) {
-  return fetch(`/tasks/${tenant}/${taskId}`, { // Use taskId in the URL
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(updateData)
-  })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
-  })
-  .then(data => {
-    console.log(`Task ${taskId} updated successfully:`, data);
-  })
-  .catch(error => console.error(`Error updating task ${taskId}:`, error));
-}
+  // Function to update a task
+  function updateTask(taskId, updateData, tenant) {
+    return fetch(`/tasks/${tenant}/${taskId}`, { // Use taskId in the URL
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(updateData)
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(`Task ${taskId} updated successfully:`, data);
+    })
+    .catch(error => console.error(`Error updating task ${taskId}:`, error));
+  }
 
   // Tab functionality
   const tabs = document.querySelectorAll('.tab_btn');
