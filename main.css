@@ -35,7 +35,7 @@ th {
 
 .scrollable { 
   overflow-y: auto; 
-  max-height: 950px; 
+  max-height: 800px; 
 }
 
 .transparent-box {
