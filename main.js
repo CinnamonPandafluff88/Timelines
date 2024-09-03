@@ -188,6 +188,52 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     .catch(error => console.error(`Error updating task ${taskId}:`, error));
   }
+  
+// Function to create a new task
+function createNewTask(taskName, projectId, tenant) {
+  const updateData = {
+    name: taskName
+  };
+
+  return fetch(`https://api-eu.ppm.express/@${tenant}/v1.0/projects/${projectId}/tasks`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${env.API_TOKEN}` 
+    },
+    body: JSON.stringify(updateData)
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log('Task created successfully:', data); 
+
+    // Add the new task to the table
+    const newTaskId = data.id; 
+    const newTaskName = data.attributes.Name;
+    const newTaskRow = document.createElement('tr');
+    newTaskRow.dataset.taskId = newTaskId;
+    newTaskRow.innerHTML = `
+      <td><input type="text" value="${newTaskName}" data-task-id="${newTaskId}" class="task-name"></td>
+      <td>Unassigned</td> 
+      <td><input type="date" value="" data-task-id="${newTaskId}" class="task-start-date"></td>
+      <td><input type="date" value="" data-task-id="${newTaskId}" class="task-due-date"></td>
+      <td><input type="text" value="" data-task-id="${newTaskId}" class="task-progress"></td>
+      <td>N/A</td> 
+    `;
+    document.querySelector('#tasksTable tbody').appendChild(newTaskRow);
+
+    // Refresh the task list
+    fetchAllProjectData(); 
+  })
+  .catch(error => console.error('Error creating task:', error));
+}
+
+
 
   // Tab functionality
   const tabs = document.querySelectorAll('.tab_btn');
@@ -248,41 +294,3 @@ function loadCSVForRisks() {
 
   reader.readAsText(file);
 }
-
-// Function to create a new task
-function createNewTask(taskName, projectId, tenant) {
-  const updateData = {
-    name: taskName
-  };
-
-  return fetch(`https://muddy-bird-8519.nfr-emea-liquid-c2.workers.dev/tasks/${tenant}/${projectId}`, { // Correct URL
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(updateData)
-  })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
-  })
-  .then(data => {
-    console.log('Task created successfully:', data);
-    // You might want to refresh the task list here or add the new task to the table
-  })
-  .catch(error => console.error('Error creating task:', error));
-}
-
-// Event listener for the add task button
-document.addEventListener('DOMContentLoaded', function () {
-  document
-    .getElementById('addTaskButton')
-    .addEventListener('click', () => {
-      const taskName = document.getElementById('newTaskName').value;
-      const projectId = document.getElementById('projectIdInput').value;
-      const tenant = 'liquid';
-      createNewTask(taskName, projectId, tenant);
-    });
-});
