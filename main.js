@@ -34,7 +34,7 @@ function populateTasksTable(tasks) {
 
   tasks.forEach((task) => {
     const row = document.createElement("tr");
-    const groupName = task.attributes.Group?.name ?? "N/A";
+    const groupName = task.attributes.Group?.name ?? "N/A"; 
     const startDate = new Date(task.attributes.StartDate);
     const dueDate = new Date(task.attributes.DueDate);
 
@@ -73,7 +73,7 @@ function populateTasksTable(tasks) {
           class="task-progress"
         />
       </td>
-      <td>${groupName}</td>
+      <td>${groupName}</td> 
     `;
 
     tableBody.appendChild(row);
