@@ -34,7 +34,6 @@ function populateTasksTable(tasks) {
 
   tasks.forEach((task) => {
     const row = document.createElement("tr");
-    const groupName = task.attributes.Group?.name ?? "N/A";
     const startDate = new Date(task.attributes.StartDate);
     const dueDate = new Date(task.attributes.DueDate);
 
@@ -43,12 +42,6 @@ function populateTasksTable(tasks) {
 
     // Use input fields for editable table data
     row.innerHTML = `
-      <td><input type="text" value="${task.attributes.Name}" data-task-id="${task.id}" class="task-name"></td>
-      <td>${
-        task.attributes.AssignedTo
-          ? task.attributes.AssignedTo.map((a) => a.fullName).join(", ")
-          : "Unassigned"
-      }</td>
       <td>
         <input
           type="date"
@@ -148,7 +141,6 @@ function updateAllTasks() {
 
   tableRows.forEach((row) => {
     const taskId = row.dataset.taskId; // Get the taskId from the row
-    const taskNameInput = row.querySelector(".task-name");
     const taskStartDateInput = row.querySelector(".task-start-date");
     const taskDueDateInput = row.querySelector(".task-due-date");
     const taskProgressInput = row.querySelector(".task-progress");
