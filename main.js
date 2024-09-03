@@ -166,14 +166,16 @@ function updateAllTasks() {
 
 // Function to update a task
 function updateTask(taskId, updateData, tenant) {
-  return fetch(`/tasks/${tenant}/${taskId}`, {
-    // Use taskId in the URL
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(updateData),
-  })
+  return fetch(
+    `/tasks/${tenant}/${taskId}`, // Use your worker as a proxy
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updateData),
+    }
+  )
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
