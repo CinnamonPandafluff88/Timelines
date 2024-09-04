@@ -8,6 +8,7 @@
 }
 
 body {
+  /* Remove fixed height or use percentage */
   background-image: url('/Logo.jpg'); 
   background-position: center;
   background-repeat: no-repeat;
@@ -16,7 +17,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 95%;  /* Remove or change to a percentage */
 }
 
 table { 
@@ -126,9 +127,10 @@ input[type="submit"]:hover {
 }
 
 .container {
-  width: 100%; /* Default width for smaller screens */
-  max-width: 1800px; /* Maximum width for larger screens */
-  background-color: rgba(241, 247, 250, 0.5); /* Set container background color */
+  /* Make the container flexible */
+  width: 96%; /* Use percentage for responsive width */
+  max-width: 1800px; 
+  background-color: rgba(241, 247, 250, 0.5); 
   padding: 30px;
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
@@ -148,7 +150,7 @@ input[type="submit"]:hover {
   justify-content: space-around;
   align-items: center;
   border-bottom: 2px solid rgba(242, 247, 250, 1);
-  position: relative;
+  position: relative; 
   top: 0;
   left: 0;
   z-index: 1000; 
