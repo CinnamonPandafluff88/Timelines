@@ -330,9 +330,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// Function to load CSV data for Risks
-function loadCSVForRisks() {
-  const input = document.getElementById("csvFileInputRisks");
+// Function to load CSV data for Issues
+function loadCSVForIssues() {
+  const input = document.getElementById("csvFileInputIssues");
   const file = input.files[0];
   const reader = new FileReader();
 
@@ -340,7 +340,7 @@ function loadCSVForRisks() {
     const text = e.target.result;
     const rows = text.split("\n");
     console.log("CSV Rows:", rows); // Debugging line
-    const table = document.getElementById("risksTable").getElementsByTagName(
+    const table = document.getElementById("issuesTable").getElementsByTagName(
       "tbody"
     )[0];
     table.innerHTML = ""; // Clear existing rows
