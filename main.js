@@ -266,22 +266,14 @@ function loadCSVForRisks() {
   reader.readAsText(file);
 }
 
+// ... your existing code ...
+
 // Event listeners
 document.addEventListener("DOMContentLoaded", function () {
   // Attach the event listener after the DOM is fully loaded
   document
     .getElementById("fetchButton")
     .addEventListener("click", fetchAllProjectData);
-
-  // Event listener for the add task button
-  document
-    .getElementById("addTaskButton")
-    .addEventListener("click", () => {
-      const taskName = document.getElementById("newTaskName").value;
-      const projectId = document.getElementById("projectIdInput").value;
-      const tenant = "liquid";
-      createNewTask(taskName, projectId, tenant);
-    });
 
   // Event listener for the update task button
   document
@@ -297,30 +289,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
   tabs.forEach((tab, index) => {
     tab.addEventListener("click", () => {
-      tabs.forEach((tab) => {
-        tab.classList.remove("active");
-      });
+      tabs.forEach((tab) => tab.classList.remove("active"));
       tab.classList.add("active");
 
       line.style.width = tab.offsetWidth + "px";
       line.style.left = tab.offsetLeft + "px";
 
-      all_content.forEach((content) => {
-        content.classList.remove("active");
-      });
+      all_content.forEach((content) => content.classList.remove("active"));
       all_content[index].classList.add("active");
-
-      // Show or hide buttons based on active tab
-      if (index === 1) {
-        // Index 1 is the "Timelines" tab
-        addTaskButton.style.display = "block";
-        updateTasksButton.style.display = "block";
-      } else {
-        addTaskButton.style.display = "none";
-        updateTasksButton.style.display = "none";
-      }
     });
   });
+
+  // Show buttons initially based on the first active tab
+  const activeTab = document.querySelector(".tab_btn.active");
+  if (activeTab) {
+    line.style.width = activeTab.offsetWidth + "px";
+    line.style.left = activeTab.offsetLeft + "px";
+    if (activeTab.textContent.includes("Timelines")) { // Check for "Timelines" text
+      addTaskButton.style.display = "block";
+      updateTasksButton.style.display = "block";
+    } else {
+      addTaskButton.style.display = "none";
+      updateTasksButton.style.display = "none";
+    }
+  }
+});
 
   // Initialize the line position
   const activeTab = document.querySelector(".tab_btn.active");
