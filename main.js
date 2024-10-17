@@ -187,55 +187,6 @@ function updateTask(taskId, updateData, tenant) {
     })
     .catch((error) => console.error(`Error updating task ${taskId}:`, error));
 }
-
-// Function to create a new task
-function createNewTask(taskName, projectId, tenant) {
-  const updateData = {
-    name: taskName,
-  };
-
-  return fetch(
-    `https://api-eu.ppm.express/@${tenant}/v1.0/projects/${projectId}/tasks`,
-    {
-      // Correct URL, using PPM Express endpoint
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${env.API_TOKEN}`, // Include Authorization header
-      },
-      body: JSON.stringify(updateData),
-    }
-  )
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    })
-    .then((data) => {
-      console.log("Task created successfully:", data);
-
-      // Add the new task to the table
-      const newTaskId = data.id;
-      const newTaskName = data.attributes.Name;
-      const newTaskRow = document.createElement("tr");
-      newTaskRow.dataset.taskId = newTaskId;
-      newTaskRow.innerHTML = `
-      <td>${newTaskName}</td>
-      <td>Unassigned</td> 
-      <td><input type="date" value="" data-task-id="${newTaskId}" class="task-start-date"></td>
-      <td><input type="date" value="" data-task-id="${newTaskId}" class="task-due-date"></td>
-      <td><input type="text" value="" data-task-id="${newTaskId}" class="task-progress"></td>
-      <td>N/A</td> 
-    `;
-      document.querySelector("#tasksTable tbody").appendChild(newTaskRow);
-
-      // Refresh the task list
-      fetchAllProjectData();
-    })
-    .catch((error) => console.error("Error creating task:", error));
-}
-
 // Function to load CSV data for Risks
 function loadCSVForRisks() {
   const input = document.getElementById("csvFileInputRisks");
