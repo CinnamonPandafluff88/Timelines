@@ -266,8 +266,6 @@ function loadCSVForRisks() {
   reader.readAsText(file);
 }
 
-// ... your existing code ...
-
 // Event listeners
 document.addEventListener("DOMContentLoaded", function () {
   // Attach the event listener after the DOM is fully loaded
@@ -320,8 +318,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (activeTab) {
     line.style.width = activeTab.offsetWidth + "px";
     line.style.left = activeTab.offsetLeft + "px";
-  }
-});
+  };
 
 // Function to load CSV data for Issues
 function loadCSVForIssues() {
