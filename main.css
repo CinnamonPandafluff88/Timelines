@@ -126,7 +126,7 @@ input[type="submit"]:hover {
 }
 
 .container {
-  width: 100%; /* Default width for smaller screens */
+  width: 95%; /* Default width for smaller screens */
   max-width: 1800px; /* Maximum width for larger screens */
   background-color: rgba(241, 247, 250, 0.5); 
   padding: 30px;
