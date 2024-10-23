@@ -136,7 +136,7 @@ function fetchAllProjectData() {
 // Function to update the program name in all h1 tags
 function updateProgramName(fullName) {
   const h1Elements = document.querySelectorAll("h1");
-  h1 Elements.forEach((h1) => {
+  h1Elements.forEach((h1) => {
       h1.textContent = `${fullName} Project`;
   });
 }
