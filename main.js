@@ -101,7 +101,7 @@ function updateProgramName(fullName) {
   });
 }
 
-// Function to save all tabs as PDF.
+// Function to save all tabs as PDF
 function saveAllTabsAsPDF() {
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF();
@@ -163,6 +163,31 @@ function loadCSVForIssues() {
     const rows = text.split('\n');
     console.log('CSV Rows:', rows); // Debugging line
     const table = document.getElementById('issuesTable').getElementsByTagName('tbody')[0];
+    table.innerHTML = ''; // Clear existing rows
+    rows.forEach((row, index) => {
+      if (index === 0 || row.trim() === '') return; // Skip header row and empty rows
+      const cols = row.split(',');
+      const newRow = table.insertRow();
+      cols.forEach(col => {
+        const cell = newRow.insertCell();
+        cell.textContent = col.trim();
+        cell.setAttribute('contenteditable', 'true'); // Make cell editable
+      });
+    });
+  };
+  reader.readAsText(file);
+}
+
+// Function to load CSV data for Risks
+function loadCSVForIssues() {
+  const input = document.getElementById('csvFileInputRisks');
+  const file = input.files[0];
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const text = e.target.result;
+    const rows = text.split('\n');
+    console.log('CSV Rows:', rows); // Debugging line
+    const table = document.getElementById('risksTable').getElementsByTagName('tbody')[0];
     table.innerHTML = ''; // Clear existing rows
     rows.forEach((row, index) => {
       if (index === 0 || row.trim() === '') return; // Skip header row and empty rows
