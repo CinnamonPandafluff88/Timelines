@@ -108,42 +108,50 @@ function updateProgramName(fullName) {
   });
 }
 
-  document.getElementById('fetchButton').addEventListener('click', fetchAllProjectData);
-  document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('printButton').addEventListener('click', function() {
-      printAllTabs();
-    });
-
-  // Tab functionality
-  const tabs = document.querySelectorAll('.tab_btn');
-  const all_content = document.querySelectorAll('.content');
-  const line = document.querySelector('.line');
-
-  tabs.forEach((tab, index) => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(tab => { tab.classList.remove('active') });
-      tab.classList.add('active');
-
-      line.style.width = tab.offsetWidth + "px";
-      line.style.left = tab.offsetLeft + "px";
-
-      all_content.forEach(content => { content.classList.remove('active') });
-      all_content[index].classList.add('active');
-    });
-  });
-
-// Function to print all tabs
-function printAllTabs() {
-  const originalContent = document.body.innerHTML;
+// Function to save all tabs as PDF
+function saveAllTabsAsPDF() {
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF();
   const tabsContent = Array.from(document.querySelectorAll('.content'))
     .map(content => content.outerHTML)
     .join('');
   
-  document.body.innerHTML = `<div class="content_box">${tabsContent}</div>`;
-  window.print();
-  document.body.innerHTML = originalContent;
-  location.reload();
+  const allTabsContent = document.createElement('div');
+  allTabsContent.innerHTML = `<div class="content_box">${tabsContent}</div>`;
+  
+  document.body.appendChild(allTabsContent);
+  
+  pdf.html(allTabsContent, {
+    callback: function (doc) {
+      doc.save('project_data.pdf');
+      document.body.removeChild(allTabsContent);
+    },
+    x: 10,
+    y: 10
+  });
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('printButton').addEventListener('click', function() {
+    saveAllTabsAsPDF();
+  });
+  
+  // Tab functionality (existing)
+  const tabs = document.querySelectorAll('.tab_btn');
+  const all_content = document.querySelectorAll('.content');
+  const line = document.querySelector('.line');
+  
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(tab => { tab.classList.remove('active') });
+      tab.classList.add('active');
+      line.style.width = tab.offsetWidth + "px";
+      line.style.left = tab.offsetLeft + "px";
+      all_content.forEach(content => { content.classList.remove('active') });
+      all_content[index].classList.add('active');
+    });
+  });
+  
   // Initialize the line position
   const activeTab = document.querySelector('.tab_btn.active');
   if (activeTab) {
