@@ -247,7 +247,6 @@ function loadCSVForIssues() {
 
   reader.readAsText(file);
 }
-// Event listeners
 document.addEventListener("DOMContentLoaded", function () {
   // Attach the event listener after the DOM is fully loaded
   document.getElementById("fetchButton").addEventListener("click", fetchAllProjectData);
@@ -267,8 +266,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const tabs = document.querySelectorAll(".tab_btn");
   const all_content = document.querySelectorAll(".content");
   const line = document.querySelector(".line");
-  const addTaskButton = document.getElementById("addTaskButton");
-  const updateTasksButton = document.getElementById("updateTasksButton");
 
   function updateLinePosition(tab) {
     line.style.width = tab.offsetWidth + "px";
@@ -277,27 +274,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   tabs.forEach((tab, index) => {
     tab.addEventListener("click", () => {
-      tabs.forEach((tab) => {
-        tab.classList.remove("active");
-      });
+      tabs.forEach((tab) => tab.classList.remove("active"));
       tab.classList.add("active");
 
       updateLinePosition(tab);
 
-      all_content.forEach((content) => {
-        content.classList.remove("active");
-      });
+      all_content.forEach((content) => content.classList.remove("active"));
       all_content[index].classList.add("active");
-
-      // Show or hide buttons based on active tab
-      if (index === 1) {
-        // Index 1 is the "Timelines" tab
-        addTaskButton.style.display = "block";
-        updateTasksButton.style.display = "block";
-      } else {
-        addTaskButton.style.display = "none";
-        updateTasksButton.style.display = "none";
-      }
     });
   });
 
