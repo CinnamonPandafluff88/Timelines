@@ -305,5 +305,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const activeTab = document.querySelector(".tab_btn.active");
   if (activeTab) {
     updateLinePosition(activeTab);
+  } else if (tabs.length > 0) {
+    // If no tab is active, set the first tab as active
+    tabs[0].classList.add("active");
+    updateLinePosition(tabs[0]);
+    all_content[0].classList.add("active");
   }
 });
