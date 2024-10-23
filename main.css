@@ -451,3 +451,14 @@ input[type="submit"]:hover {
   border-radius: 3px; /* Optional: Add rounded corners */
   /* Add more styles as needed to match your background */
 }
+.print-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

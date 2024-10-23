@@ -108,9 +108,11 @@ function updateProgramName(fullName) {
   });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-  // Attach the event listener after the DOM is fully loaded
   document.getElementById('fetchButton').addEventListener('click', fetchAllProjectData);
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('printButton').addEventListener('click', function() {
+      printAllTabs();
+    });
 
   // Tab functionality
   const tabs = document.querySelectorAll('.tab_btn');
@@ -130,6 +132,18 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
+// Function to print all tabs
+function printAllTabs() {
+  const originalContent = document.body.innerHTML;
+  const tabsContent = Array.from(document.querySelectorAll('.content'))
+    .map(content => content.outerHTML)
+    .join('');
+  
+  document.body.innerHTML = `<div class="content_box">${tabsContent}</div>`;
+  window.print();
+  document.body.innerHTML = originalContent;
+  location.reload();
+}
   // Initialize the line position
   const activeTab = document.querySelector('.tab_btn.active');
   if (activeTab) {
