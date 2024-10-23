@@ -101,7 +101,7 @@ function updateProgramName(fullName) {
   });
 }
 
-// Function to save all tabs as PDF
+// Function to save all tabs as PDF.
 function saveAllTabsAsPDF() {
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF();
