@@ -13,39 +13,34 @@ function fetchProjectTasks(projectId, tenant) {
     return response.json();
   })
   .then(data => {
-    console.log('Fetched tasks:', data.data); 
+    console.log('Fetched tasks:', data.data);
     return data;
   })
   .catch(error => console.error('Error fetching tasks:', error));
 }
 
-// Function to populate the tasks table 
+// Function to populate the tasks table
 function populateTasksTable(tasks) {
   const tableBody = document.querySelector('#tasksTable tbody');
   tableBody.innerHTML = ''; // Clear existing table data
-
   if (!Array.isArray(tasks)) {
     console.error('Expected an array but got:', tasks);
     return;
   }
-
   tasks.forEach(task => {
     const row = document.createElement('tr');
-
     // Access attributes safely using conditionals
     const groupName = task.attributes.Group?.name ?? 'N/A';
     const startDate = new Date(task.attributes.StartDate);
     const dueDate = new Date(task.attributes.DueDate);
-
     row.innerHTML = `
-        <td>${task.attributes.Name}</td> 
-        <td>${task.attributes.AssignedTo ? task.attributes.AssignedTo.map(a => a.fullName).join(', ') : 'Unassigned'}</td> 
-        <td>${startDate.getMonth() + 1}/${startDate.getDate()}/${startDate.getFullYear()}</td> 
-        <td>${dueDate.getMonth() + 1}/${dueDate.getDate()}/${dueDate.getFullYear()}</td> 
-        <td>${task.attributes.Progress}</td> 
-        <td>${groupName}</td> 
+        <td>${task.attributes.Name}</td>
+        <td>${task.attributes.AssignedTo ? task.attributes.AssignedTo.map(a => a.fullName).join(', ') : 'Unassigned'}</td>
+        <td>${startDate.getMonth() + 1}/${startDate.getDate()}/${startDate.getFullYear()}</td>
+        <td>${dueDate.getMonth() + 1}/${dueDate.getDate()}/${dueDate.getFullYear()}</td>
+        <td>${task.attributes.Progress}</td>
+        <td>${groupName}</td>
     `;
-
     tableBody.appendChild(row);
   });
 }
@@ -78,10 +73,8 @@ function fetchProjectDetails(projectId, tenant) {
 function fetchAllProjectData() {
   const projectUrl = document.getElementById('projectIdInput').value;
   const tenant = 'liquid'; // Replace with your tenant name
-
   // Extract the project ID from the URL
   const projectId = projectUrl.split('/').pop().split('?')[0];
-
   if (projectId) {
     // Fetch project details first
     fetchProjectDetails(projectId, tenant)
@@ -132,11 +125,11 @@ function saveAllTabsAsPDF() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('printButton').addEventListener('click', function() {
-    saveAllTabsAsPDF();
-  });
+  // Attach the event listener after the DOM is fully loaded
+  document.getElementById('fetchButton').addEventListener('click', fetchAllProjectData);
+  document.getElementById('printButton').addEventListener('click', saveAllTabsAsPDF);
   
-  // Tab functionality (existing)
+  // Tab functionality
   const tabs = document.querySelectorAll('.tab_btn');
   const all_content = document.querySelectorAll('.content');
   const line = document.querySelector('.line');
@@ -160,30 +153,27 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// Function to load CSV data for Risks 
+// Function to load CSV data for Issues
 function loadCSVForIssues() {
   const input = document.getElementById('csvFileInputIssues');
   const file = input.files[0];
   const reader = new FileReader();
-
   reader.onload = function(e) {
     const text = e.target.result;
     const rows = text.split('\n');
     console.log('CSV Rows:', rows); // Debugging line
     const table = document.getElementById('issuesTable').getElementsByTagName('tbody')[0];
     table.innerHTML = ''; // Clear existing rows
-
     rows.forEach((row, index) => {
-        if (index === 0 || row.trim() === '') return; // Skip header row and empty rows
-        const cols = row.split(',');
-        const newRow = table.insertRow();
-        cols.forEach(col => {
-          const cell = newRow.insertCell();
-          cell.textContent = col.trim();
-          cell.setAttribute('contenteditable', 'true'); // Make cell editable
-        });
+      if (index === 0 || row.trim() === '') return; // Skip header row and empty rows
+      const cols = row.split(',');
+      const newRow = table.insertRow();
+      cols.forEach(col => {
+        const cell = newRow.insertCell();
+        cell.textContent = col.trim();
+        cell.setAttribute('contenteditable', 'true'); // Make cell editable
       });
-    };
-  
-    reader.readAsText(file);
-  }
+    });
+  };
+  reader.readAsText(file);
+}
