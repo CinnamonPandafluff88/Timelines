@@ -247,13 +247,10 @@ function loadCSVForIssues() {
 
   reader.readAsText(file);
 }
-
 // Event listeners
 document.addEventListener("DOMContentLoaded", function () {
   // Attach the event listener after the DOM is fully loaded
   document.getElementById("fetchButton").addEventListener("click", fetchAllProjectData);
-
-  // Event listener for the update task button
   document.getElementById("updateTasksButton").addEventListener("click", updateAllTasks);
 
   // Tab functionality
@@ -263,6 +260,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const addTaskButton = document.getElementById("addTaskButton");
   const updateTasksButton = document.getElementById("updateTasksButton");
 
+  // Function to set the line position
+  function setLinePosition(activeTab) {
+      line.style.width = activeTab.offsetWidth + "px";
+      line.style.left = activeTab.offsetLeft + "px";
+  }
+
   tabs.forEach((tab, index) => {
       tab.addEventListener("click", () => {
           tabs.forEach((tab) => {
@@ -270,12 +273,12 @@ document.addEventListener("DOMContentLoaded", function () {
           });
           tab.classList.add("active");
 
-          line.style.width = tab.offsetWidth + "px";
-          line.style.left = tab.offsetLeft + "px";
+          // Set the line position based on the active tab
+          setLinePosition(tab);
 
           all_content.forEach((content) => {
               content.classList.remove("active");
-});
+          });
           all_content[index].classList.add("active");
 
           // Show or hide buttons based on active tab
@@ -290,10 +293,9 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
 
-  // Initialize the line position
+  // Initialize the line position for the active tab on page load
   const activeTab = document.querySelector(".tab_btn.active");
   if (activeTab) {
-      line.style.width = activeTab.offsetWidth + "px";
-      line.style.left = activeTab.offsetLeft + "px";
+      setLinePosition(activeTab);
   }
 });
