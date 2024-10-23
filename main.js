@@ -251,6 +251,16 @@ function loadCSVForIssues() {
 document.addEventListener("DOMContentLoaded", function () {
   // Attach the event listener after the DOM is fully loaded
   document.getElementById("fetchButton").addEventListener("click", fetchAllProjectData);
+
+  // Event listener for the add task button
+  document.getElementById("addTaskButton").addEventListener("click", () => {
+    const taskName = document.getElementById("newTaskName").value;
+    const projectId = document.getElementById("projectIdInput").value;
+    const tenant = "liquid";
+    createNewTask(taskName, projectId, tenant);
+  });
+
+  // Event listener for the update task button
   document.getElementById("updateTasksButton").addEventListener("click", updateAllTasks);
 
   // Tab functionality
@@ -260,42 +270,40 @@ document.addEventListener("DOMContentLoaded", function () {
   const addTaskButton = document.getElementById("addTaskButton");
   const updateTasksButton = document.getElementById("updateTasksButton");
 
-  // Function to set the line position
-  function setLinePosition(activeTab) {
-      line.style.width = activeTab.offsetWidth + "px";
-      line.style.left = activeTab.offsetLeft + "px";
+  function updateLinePosition(tab) {
+    line.style.width = tab.offsetWidth + "px";
+    line.style.left = tab.offsetLeft + "px";
   }
 
   tabs.forEach((tab, index) => {
-      tab.addEventListener("click", () => {
-          tabs.forEach((tab) => {
-              tab.classList.remove("active");
-          });
-          tab.classList.add("active");
-
-          // Set the line position based on the active tab
-          setLinePosition(tab);
-
-          all_content.forEach((content) => {
-              content.classList.remove("active");
-          });
-          all_content[index].classList.add("active");
-
-          // Show or hide buttons based on active tab
-          if (index === 1) {
-              // Index 1 is the "Timelines" tab
-              addTaskButton.style.display = "block";
-              updateTasksButton.style.display = "block";
-          } else {
-              addTaskButton.style.display = "none";
-              updateTasksButton.style.display = "none";
-          }
+    tab.addEventListener("click", () => {
+      tabs.forEach((tab) => {
+        tab.classList.remove("active");
       });
+      tab.classList.add("active");
+
+      updateLinePosition(tab);
+
+      all_content.forEach((content) => {
+        content.classList.remove("active");
+      });
+      all_content[index].classList.add("active");
+
+      // Show or hide buttons based on active tab
+      if (index === 1) {
+        // Index 1 is the "Timelines" tab
+        addTaskButton.style.display = "block";
+        updateTasksButton.style.display = "block";
+      } else {
+        addTaskButton.style.display = "none";
+        updateTasksButton.style.display = "none";
+      }
+    });
   });
 
-  // Initialize the line position for the active tab on page load
+  // Initialize the line position
   const activeTab = document.querySelector(".tab_btn.active");
   if (activeTab) {
-      setLinePosition(activeTab);
+    updateLinePosition(activeTab);
   }
 });
