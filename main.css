@@ -14,9 +14,11 @@ body {
   background-size: cover;
   background-color: #f1f7fa;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  padding-top: 20px;
 }
 
 table { 
