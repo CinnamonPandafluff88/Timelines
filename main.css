@@ -127,23 +127,21 @@ input[type="submit"]:hover {
 }
 
 .container {
-  width: 90%; /* Adjusted width for better fit */
-  max-width: 1200px; /* Maximum width for larger screens */
+  width: 90%; /* Default width for smaller screens */
+  max-width: 1000px; /* Maximum width for larger screens */
   background-color: rgba(241, 247, 250, 0.5); 
-  padding: 30px;
+  padding: 20px;
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
-  border-radius: 20px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px; /* Space at the top */
-  padding-top: 50px; /* Additional padding at the top */
+  margin: 0 auto;
 }
 
 .heading {
   text-align: center;
-  margin-bottom: 10px;
-  margin-top: 0; /* Ensure no extra margin at the top */
+  margin-bottom: 20px;
 }
 
 .tab_box {
